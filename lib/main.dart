@@ -19,7 +19,9 @@ class MyApp extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          backgroundColor: Colors.grey,
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: Colors.white,
         ),
       ),
     );
