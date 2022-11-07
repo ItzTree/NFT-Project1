@@ -23,6 +23,25 @@ class MyApp extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.white,
         ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.announcement_outlined),
+              label: '공지',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.question_answer_outlined),
+              label: '게시판',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: '설정',
+            ),
+          ],
+        ),
       ),
     );
   }
