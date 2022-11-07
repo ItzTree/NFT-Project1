@@ -1,6 +1,7 @@
-# sscc_talk
+# SSCC Talk
 
-A new Flutter project.
+스크톡!  
+SSCC 해커톤(2022/11/01 ~ 11/18)에 Software 분야로 참가한 어플  
 
 ## Getting Started
 
