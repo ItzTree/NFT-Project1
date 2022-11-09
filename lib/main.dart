@@ -11,11 +11,73 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }
 
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController idController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    /// ID
+    var idTextField = TextField(
+      controller: idController,
+      decoration: InputDecoration(hintText: 'ID'),
+    );
+
+    /// 비밀번호
+    var passwordTextField = TextField(
+      controller: passwordController,
+      obscureText: false,
+      decoration: InputDecoration(hintText: "Password"),
+    );
+
+    /// 로그인 버튼
+    var loginElevatedButton = ElevatedButton(
+      child: Text("로그인", style: TextStyle(fontSize: 21)),
+      onPressed: () {
+        // 로그인 성공 시 HomePage로 이동
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => HomePage()),
+        );
+      },
+    );
+
+    /// 회원가입 버튼
+    var registerElevatedButton = ElevatedButton(
+      child: Text("회원가입", style: TextStyle(fontSize: 21)),
+      onPressed: () {
+        print("회원가입 버튼 클릭됨");
+      },
+    );
+
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          idTextField,
+          passwordTextField,
+          SizedBox(height: 32),
+          loginElevatedButton,
+          registerElevatedButton,
+        ],
+      ),
+    );
+  }
+}
+
+/// 메인 페이지
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -77,6 +139,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+/// 공지
 class FirstPage extends StatelessWidget {
   const FirstPage({super.key});
 
@@ -90,6 +153,7 @@ class FirstPage extends StatelessWidget {
   }
 }
 
+/// 게시판
 class SecondPage extends StatelessWidget {
   const SecondPage({super.key});
 
@@ -103,6 +167,7 @@ class SecondPage extends StatelessWidget {
   }
 }
 
+/// 설정
 class ThirdPage extends StatelessWidget {
   const ThirdPage({super.key});
 
