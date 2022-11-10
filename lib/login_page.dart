@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sscc_talk/main.dart';
 import 'package:sscc_talk/register_page.dart';
+import 'package:sscc_talk/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -56,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
 
     /// 로그인 버튼
     var loginElevatedButton = SizedBox(
-      width: 120,
+      width: 240,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: sscctalkPrimaryColor,
@@ -76,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     /// 회원가입 버튼 샘플 (수평)
-    var registerElevatedButtonInHorizontal = SizedBox(
+    var shiftToRegisterElevatedButtonInHorizontal = SizedBox(
       width: 120,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -98,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     /// 회원가입 버튼 샘플 (수직)
-    var registerTextButtonInVertical = TextButton(
+    var shiftToRegisterTextButtonInVertical = TextButton(
       style: ButtonStyle(
         overlayColor:
             MaterialStateColor.resolveWith((states) => Colors.black12),
@@ -140,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   loginElevatedButton,
                   SizedBox(width: 16),
-                  registerElevatedButtonInHorizontal,
+                  shiftToRegisterElevatedButtonInHorizontal,
                 ],
               )
             // 수직
@@ -148,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
               Column(
                 children: [
                   loginElevatedButton,
-                  registerTextButtonInVertical,
+                  shiftToRegisterTextButtonInVertical,
                 ],
               ),
           ],
