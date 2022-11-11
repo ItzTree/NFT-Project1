@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sscc_talk/main.dart';
 import 'package:sscc_talk/register_page.dart';
-import 'package:sscc_talk/home_page.dart';
+import 'package:sscc_talk/main_body.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (_) => HomePage()),
+            MaterialPageRoute(builder: (_) => MainBody()),
           );
         },
       ),
