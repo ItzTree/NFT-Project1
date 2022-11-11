@@ -92,33 +92,42 @@ Future<dynamic> _showdialog(BuildContext context) {
   return showDialog(
     context: context,
     builder: (BuildContext context) => AlertDialog(
-      title: Text('Warning!'),
+      title: Text(
+        '회원탈퇴',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
       content: Text("정말 탈퇴하시겠어요?"),
       actions: [
         ElevatedButton(
           style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-            sscctalkPrimaryColor,
-          )),
+            backgroundColor: MaterialStateProperty.all<Color>(
+              Colors.white,
+            ),
+            elevation: MaterialStateProperty.all<double>(0),
+          ),
           onPressed: () => Navigator.of(context).pop(),
           child: Text(
             '네',
             style: TextStyle(
-              fontSize: 10,
-              color: Colors.black,
+              fontSize: 15,
+              color: Colors.red,
             ),
           ),
         ),
         ElevatedButton(
           style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-            sscctalkPrimaryColor,
-          )),
+            backgroundColor: MaterialStateProperty.all<Color>(
+              Colors.white,
+            ),
+            elevation: MaterialStateProperty.all<double>(0),
+          ),
           onPressed: () => Navigator.of(context).pop(),
           child: Text(
             '아니오',
             style: TextStyle(
-              fontSize: 10,
+              fontSize: 15,
               color: Colors.black,
             ),
           ),
