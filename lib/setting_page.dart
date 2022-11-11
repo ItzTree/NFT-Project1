@@ -45,7 +45,7 @@ class SettingPage extends StatelessWidget {
               SizedBox(height: 32),
               ListTile(
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const LoginPage(),
