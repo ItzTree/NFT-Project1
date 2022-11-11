@@ -11,19 +11,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: changeInfoPage(),
+      home: ChangeInfoPage(),
     );
   }
 }
 
-class changeInfoPage extends StatefulWidget {
-  const changeInfoPage({super.key});
+class ChangeInfoPage extends StatefulWidget {
+  const ChangeInfoPage({super.key});
 
   @override
-  State<changeInfoPage> createState() => _changeInfoPageState();
+  State<ChangeInfoPage> createState() => _ChangeInfoPageState();
 }
 
-class _changeInfoPageState extends State<changeInfoPage> {
+class _ChangeInfoPageState extends State<ChangeInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,6 +1,5 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:sscc_talk/main.dart';
 
 import 'package:sscc_talk/notice_page.dart';
 import 'package:sscc_talk/post_page.dart';
@@ -15,7 +14,7 @@ class MainBody extends StatefulWidget {
 }
 
 class _MainBodyState extends State<MainBody> {
-  int currentIndex = 0;
+  int currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +58,7 @@ class _MainBodyState extends State<MainBody> {
     return ConvexAppBar(
       style: TabStyle.fixedCircle,
       backgroundColor: Colors.black45,
-
-      // color: Colors.white,
+      initialActiveIndex: currentIndex,
       items: [
         TabItem(
           icon: Icon(Icons.announcement_outlined, color: Colors.white60),
@@ -68,7 +66,8 @@ class _MainBodyState extends State<MainBody> {
           title: "공지",
         ),
         TabItem(
-          icon: Icon(Icons.house, size: 36),
+          icon: Icon(Icons.house, size: 36, color: Colors.black26),
+          activeIcon: Icon(Icons.house, size: 36, color: Colors.black45),
         ),
         TabItem(
           icon: Icon(Icons.question_answer_outlined, color: Colors.white60),
