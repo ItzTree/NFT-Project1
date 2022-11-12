@@ -39,14 +39,12 @@ class _MainBodyState extends State<MainBody> {
       items: [
         TabItem(
           icon: Icon(Icons.announcement_outlined, color: Colors.black38),
-          activeIcon: Icon(Icons.announcement_outlined, color: Colors.black),
         ),
         TabItem(
           icon: Icon(Icons.house, size: 36),
         ),
         TabItem(
           icon: Icon(Icons.question_answer_outlined, color: Colors.black38),
-          activeIcon: Icon(Icons.question_answer_outlined, color: Colors.black),
         ),
       ],
       onTap: (newIndex) {

@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sscc_talk/setting_page.dart';
 
+import 'comment_popup.dart';
 import 'main.dart';
-import 'main_body.dart';
 
 class NoticePage extends StatelessWidget {
   const NoticePage({Key? key}) : super(key: key);
@@ -14,32 +14,19 @@ class NoticePage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => MainBody()));
+              Navigator.pop(context);
             },
             icon: Icon(
               Icons.arrow_back,
               color: Colors.black,
             )),
         title: Text(
-          'SSCC TALK',
+          '공 지 사 항',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         elevation: 0,
         backgroundColor: sscctalkPrimaryColor,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.settings),
-            color: Colors.black,
-            onPressed: (() {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => SettingPage()),
-              );
-            }),
-          ),
-        ],
       ),
       body: ListView.builder(
         itemCount: 10,
@@ -50,7 +37,10 @@ class NoticePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         heroTag: 'noticeFAB',
         onPressed: () {
-          print("클릭 되었습니다.!");
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => Messagetext()),
+          );
         },
         backgroundColor: Colors.black,
         child: const Icon(
@@ -68,7 +58,7 @@ class Feed extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  // 이미지를 담을 변수    아래가 private한 클래스여서!
+  // 이미지를 담을 변수: 아래가 private한 클래스여서!
   @override
   State<Feed> createState() => _FeedState();
 }
@@ -113,6 +103,7 @@ class _FeedState extends State<Feed> {
             ),
           ),
           Row(
+            // 아이콘들
             children: [
               IconButton(
                 icon: Icon(
@@ -128,17 +119,114 @@ class _FeedState extends State<Feed> {
               ),
               IconButton(
                 icon: Icon(CupertinoIcons.chat_bubble, color: Colors.black),
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return CommentUI();
+                      });
+                },
               ),
               Spacer(),
               IconButton(
-                icon: Icon(CupertinoIcons.bookmark, color: Colors.black),
+                icon: Icon(CupertinoIcons.delete, color: Colors.black),
                 onPressed: () {},
               ),
             ],
           ),
           Divider()
         ],
+      ),
+    );
+  }
+}
+
+/// 글쓰기 화면
+class Messagetext extends StatelessWidget {
+  const Messagetext({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        // actionsIconTheme:
+        title: Text(
+          "SSCC TALK",
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(25),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "글쓰기",
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 32,
+                ),
+              ),
+              SizedBox(height: 15),
+              Container(
+                // decoration: BoxDecoration(border: Border.all()),
+                height: 65,
+                width: 500,
+                child: SizedBox(
+                  child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                        hintText: "제목",
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black))),
+                  ),
+                ),
+              ),
+              Container(
+                height: 150,
+                width: 500,
+                child: SizedBox(
+                  child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      hintText: "내용",
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 200),
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                      child: Text("작성"))
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

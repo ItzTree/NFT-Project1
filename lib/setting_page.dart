@@ -18,7 +18,7 @@ class SettingPage extends StatelessWidget {
         ),
         //actionsIconTheme:
         title: Text(
-          "SSCC TALK",
+          "환 경 설 정",
           style: TextStyle(
             fontSize: 18,
             color: Colors.black,
@@ -36,7 +36,7 @@ class SettingPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "nickname님", //$nickname 님
+                "nickname 님", //$nickname 님
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
                   fontSize: 32,
