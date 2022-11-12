@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         child: Text("로그인", style: TextStyle(fontSize: 21, color: Colors.black)),
         onPressed: () {
-          Navigator.pushReplacement(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (_) => MainBody()),
           );
