@@ -15,8 +15,8 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
-          automaticallyImplyLeading: false,
           'SSCC Talk',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),

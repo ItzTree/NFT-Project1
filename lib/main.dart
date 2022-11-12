@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sscc_talk/login_page.dart';
+import 'login_page.dart';
 
 var sscctalkPrimaryColor = Color(0xffc8c8c8);
 

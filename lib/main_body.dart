@@ -63,7 +63,6 @@ class _MainBodyState extends State<MainBody> {
         TabItem(
           icon: Icon(Icons.announcement_outlined, color: Colors.black),
           activeIcon: Icon(Icons.announcement_outlined, color: Colors.black),
-          title: "공지",
         ),
         TabItem(
           icon: Icon(Icons.house, size: 36),
@@ -71,7 +70,6 @@ class _MainBodyState extends State<MainBody> {
         TabItem(
           icon: Icon(Icons.question_answer_outlined, color: Colors.black),
           activeIcon: Icon(Icons.question_answer_outlined, color: Colors.black),
-          title: "게시판",
         ),
       ],
       onTap: (newIndex) {
