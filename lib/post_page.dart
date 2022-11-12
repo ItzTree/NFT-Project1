@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'comment_popup.dart';
 import 'main.dart';
+import 'main_body.dart';
 import 'mainbody.dart';
 import 'setting_page.dart';
-import 'comment_popup.dart';
 
 class PostPage extends StatelessWidget {
   const PostPage({super.key});
@@ -50,7 +51,10 @@ class PostPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print("클릭 되었습니다.!");
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => Messagetext()),
+          );
         },
         backgroundColor: Colors.black,
         child: const Icon(
@@ -129,11 +133,12 @@ class _FeedState extends State<Feed> {
               IconButton(
                 icon: Icon(CupertinoIcons.chat_bubble, color: Colors.black),
                 onPressed: () {
-                showDialog(
+                  showDialog(
                       context: context,
                       builder: (context) {
-                        return CommentUI(); 
-                      });},
+                        return CommentUI();
+                      });
+                },
               ),
               Spacer(),
               IconButton(
@@ -144,6 +149,112 @@ class _FeedState extends State<Feed> {
           ),
           Divider()
         ],
+      ),
+    );
+  }
+}
+
+//글쓰기 화면
+class Messagetext extends StatelessWidget {
+  const Messagetext({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        //actionsIconTheme:
+        title: Text(
+          "SSCC TALK",
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(25),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "글쓰기",
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 32,
+                ),
+              ),
+              SizedBox(height: 15),
+              Container(
+                // decoration: BoxDecoration(border: Border.all()),
+                height: 65,
+                width: 500,
+                child: SizedBox(
+                  child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                        hintText: "제목",
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black))),
+                  ),
+                ),
+              ),
+              Container(
+                height: 150,
+                width: 500,
+                child: SizedBox(
+                  child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      hintText: "내용",
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              // ListTile(
+              //   onTap: () {
+              //     Navigator.pop(context);
+              //   },
+              //   title: Text("작성"),
+              // ),
+              SizedBox(height: 200),
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                      child: Text("작성"))
+                ],
+              ),
+              // Container(
+              //   width: 100,
+              //   child: ElevatedButton(
+              //     onPressed: () {
+              //       Navigator.pop(context);
+              //     },
+              //     child: Text("작성"),
+              //   ),
+              // )
+            ],
+          ),
+        ),
       ),
     );
   }
