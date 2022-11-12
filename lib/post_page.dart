@@ -142,7 +142,7 @@ class _FeedState extends State<Feed> {
               ),
               Spacer(),
               IconButton(
-                icon: Icon(CupertinoIcons.bookmark, color: Colors.black),
+                icon: Icon(CupertinoIcons.delete, color: Colors.black),
                 onPressed: () {},
               ),
             ],
