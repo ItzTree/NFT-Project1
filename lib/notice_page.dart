@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sscc_talk/setting_page.dart';
+
+import 'main.dart';
 
 class NoticePage extends StatelessWidget {
   const NoticePage({Key? key}) : super(key: key);
@@ -7,6 +10,35 @@ class NoticePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            )),
+        title: Text(
+          'SSCC Talk',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: sscctalkPrimaryColor,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.settings),
+            color: Colors.black,
+            onPressed: (() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => SettingPage()),
+              );
+            }),
+          ),
+        ],
+      ),
       body: ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {
