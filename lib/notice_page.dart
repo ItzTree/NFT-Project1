@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sscc_talk/setting_page.dart';
 
 import 'comment_popup.dart';
 import 'main.dart';
 
 class NoticePage extends StatelessWidget {
-  const NoticePage({Key? key}) : super(key: key);
+  const NoticePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,7 @@ class NoticePage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        heroTag: 'noticeFAB',
+        heroTag: 'postFAB',
         onPressed: () {
           Navigator.push(
             context,
@@ -58,7 +57,7 @@ class Feed extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  // 이미지를 담을 변수: 아래가 private한 클래스여서!
+  // 이미지를 담을 변수    아래가 private한 클래스여서!
   @override
   State<Feed> createState() => _FeedState();
 }
@@ -103,7 +102,6 @@ class _FeedState extends State<Feed> {
             ),
           ),
           Row(
-            // 아이콘들
             children: [
               IconButton(
                 icon: Icon(
@@ -143,7 +141,7 @@ class _FeedState extends State<Feed> {
   }
 }
 
-/// 글쓰기 화면
+//글쓰기 화면
 class Messagetext extends StatelessWidget {
   const Messagetext({Key? key}) : super(key: key);
 
@@ -157,7 +155,7 @@ class Messagetext extends StatelessWidget {
         iconTheme: IconThemeData(
           color: Colors.black,
         ),
-        // actionsIconTheme:
+        //actionsIconTheme:
         title: Text(
           "SSCC TALK",
           style: TextStyle(
@@ -177,7 +175,7 @@ class Messagetext extends StatelessWidget {
                 "글쓰기",
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
-                  fontSize: 32,
+                  fontSize: 28,
                 ),
               ),
               SizedBox(height: 15),
@@ -198,7 +196,7 @@ class Messagetext extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 150,
+                height: 120,
                 width: 500,
                 child: SizedBox(
                   child: TextField(
@@ -214,18 +212,42 @@ class Messagetext extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 200),
-              Row(
-                children: [
-                  Spacer(),
-                  ElevatedButton(
+              // ListTile(
+              //   onTap: () {
+              //     Navigator.pop(context);
+              //   },
+              //   title: Text("작성"),
+              // ),
+              //SizedBox(height: 10),
+              Center(
+                child: SizedBox(
+                  width: 200,
+                  height: 40,
+                  child: ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
-                      child: Text("작성"))
-                ],
-              ),
+                      style: ElevatedButton.styleFrom(
+                          primary: sscctalkPrimaryColor, elevation: 0),
+                      child: Text(
+                        "작성하기",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
+                ),
+              )
+              // Container(
+              //   width: 100,
+              //   child: ElevatedButton(
+              //     onPressed: () {
+              //       Navigator.pop(context);
+              //     },
+              //     child: Text("작성"),
+              //   ),
+              // )
             ],
           ),
         ),
