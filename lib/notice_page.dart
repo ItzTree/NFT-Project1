@@ -4,6 +4,7 @@ import 'package:sscc_talk/setting_page.dart';
 
 import 'main.dart';
 import 'mainbody.dart';
+import 'comment_popup.dart';
 
 class NoticePage extends StatelessWidget {
   const NoticePage({Key? key}) : super(key: key);
@@ -127,7 +128,12 @@ class _FeedState extends State<Feed> {
               ),
               IconButton(
                 icon: Icon(CupertinoIcons.chat_bubble, color: Colors.black),
-                onPressed: () {},
+                onPressed: () {
+                showDialog(
+                      context: context,
+                      builder: (context) {
+                        return CommentUI(); 
+                      });},
               ),
               Spacer(),
               IconButton(
