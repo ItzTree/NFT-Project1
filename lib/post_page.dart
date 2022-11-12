@@ -175,7 +175,7 @@ class Messagetext extends StatelessWidget {
                 "글쓰기",
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
-                  fontSize: 32,
+                  fontSize: 28,
                 ),
               ),
               SizedBox(height: 15),
@@ -196,7 +196,7 @@ class Messagetext extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 150,
+                height: 120,
                 width: 500,
                 child: SizedBox(
                   child: TextField(
@@ -218,18 +218,27 @@ class Messagetext extends StatelessWidget {
               //   },
               //   title: Text("작성"),
               // ),
-              SizedBox(height: 200),
-              Row(
-                children: [
-                  Spacer(),
-                  ElevatedButton(
+              //SizedBox(height: 10),
+              Center(
+                child: SizedBox(
+                  width: 200,
+                  height: 40,
+                  child: ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
-                      child: Text("작성"))
-                ],
-              ),
+                      style: ElevatedButton.styleFrom(
+                          primary: sscctalkPrimaryColor, elevation: 0),
+                      child: Text(
+                        "작성하기",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
+                ),
+              )
               // Container(
               //   width: 100,
               //   child: ElevatedButton(
