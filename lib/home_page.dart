@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              'SSCC 홈커밍이 찾아왔습니다! \n 1부 - 2022 해커톤 어쩌고저쩌고 2부 홈커밍데이 어쩌고 11월 19일',
+                              'SSCC 홈커밍이 찾아왔습니다! \n 1부 - 2022 해커톤 발표평가회 / 15시30분 \n 2부 홈커밍데이 / 18시00분 / 학교 인근 술집',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.black,
@@ -93,7 +93,7 @@ class HomePage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              '해커톤 신청 기한 연장 공지 \n 기존 신청 기한 : 10/31 23:59 -> 변경된 어쩌고',
+                              '해커톤 신청 기한 연장 공지 \n 기존 신청 기한 : 10/31 23:59 -> 11/1 23:59',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.black,
@@ -132,7 +132,7 @@ class HomePage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              'SSCC 홈커밍이 찾아왔습니다! \n 1부 - 2022 해커톤 어쩌고저쩌고 2부 홈커밍데이 어쩌고 11월 19일',
+                              '12/11까지 30일동안 DailyBOJ 같이 하실 분~ \n문제 난이도와 상관없이 하루 한 문제 푸는 것을 목표로 합니다. 관심있으신 분은 연락주세요~',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.black,
@@ -146,7 +146,7 @@ class HomePage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              'SSCC 번개모임 안내 \n 일시 : 11/9 수요일 18시, 장소 : 추후 공지 예정',
+                              '내일 11시~16시 동아리 프로젝트 진행하겠습니다.  동방 사용에 참고해주세요!',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.black,
@@ -160,7 +160,7 @@ class HomePage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              '해커톤 신청 기한 연장 공지 \n 기존 신청 기한 : 10/31 23:59 -> 변경된 어쩌고',
+                              '오늘 8시 이후로 동방에서 RSA 스터디를 진행할 예정입니다.  동방 사용에 참고해주세요~',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.black,
