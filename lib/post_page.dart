@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'mainbody.dart';
 import 'setting_page.dart';
+import 'comment_popup.dart';
 
 class PostPage extends StatelessWidget {
   const PostPage({super.key});
@@ -127,7 +128,12 @@ class _FeedState extends State<Feed> {
               ),
               IconButton(
                 icon: Icon(CupertinoIcons.chat_bubble, color: Colors.black),
-                onPressed: () {},
+                onPressed: () {
+                showDialog(
+                      context: context,
+                      builder: (context) {
+                        return CommentUI(); 
+                      });},
               ),
               Spacer(),
               IconButton(
