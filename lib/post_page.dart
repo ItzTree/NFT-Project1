@@ -3,38 +3,68 @@ import 'package:flutter/material.dart';
 
 import 'comment_popup.dart';
 import 'main.dart';
+import 'main_body.dart';
+import 'mainbody.dart';
+import 'setting_page.dart';
 
 class PostPage extends StatelessWidget {
   const PostPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final List<String> textms = [
+      "12/11까지 30일동안 DailyBOJ 같이 하실 분~",
+      "NFT 팀 동방 사용",
+      "RSA 스터디 동방 사용",
+      "[긴급!!]"
+    ];
+    final List<String> textms2 = [
+      "문제 난이도와 상관없이 하루 한 문제 푸는 것을 목표로 합니다. 과심잇으신 분은 연락주세요~",
+      "내일 11시 16시 동아리 프로젝트 진행하겠습니다. 동방 사용에 참고해주세요!!",
+      "오늘 8시 이후로 동방에서 RSA 스터디를 진행할 예정입니다. 동방 사용에 참고해주세요~",
+      "지금 동방에 계신 분 연락 한번만 부탁드립니다!!!"
+    ];
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => MainBody()));
             },
             icon: Icon(
               Icons.arrow_back,
               color: Colors.black,
             )),
         title: Text(
-          '자 유 게 시 판',
+          '게시판',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         elevation: 0,
         backgroundColor: sscctalkPrimaryColor,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.settings),
+            color: Colors.black,
+            onPressed: (() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => SettingPage()),
+              );
+            }),
+          ),
+        ],
       ),
       body: ListView.builder(
-        itemCount: 10,
+        itemCount: textms.length,
         itemBuilder: (context, index) {
-          return Feed();
+          String textm = textms[index];
+          String textm2 = textms2[index];
+          return Feed(txtmessage: textm, txtmessage2: textm2);
         },
       ),
       floatingActionButton: FloatingActionButton(
-        heroTag: 'postFAB',
         onPressed: () {
           Navigator.push(
             context,
@@ -55,7 +85,12 @@ class PostPage extends StatelessWidget {
 class Feed extends StatefulWidget {
   const Feed({
     Key? key,
+    required this.txtmessage,
+    required this.txtmessage2,
   }) : super(key: key);
+
+  final String txtmessage;
+  final String txtmessage2;
 
   // 이미지를 담을 변수    아래가 private한 클래스여서!
   @override
@@ -76,7 +111,7 @@ class _FeedState extends State<Feed> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "제목",
+              widget.txtmessage,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -87,7 +122,7 @@ class _FeedState extends State<Feed> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "My cat is docile even when bathed. I put a duck on his head in the wick and he's staring at me. Isn't it so cute??",
+              widget.txtmessage2,
             ),
           ),
 
@@ -175,7 +210,7 @@ class Messagetext extends StatelessWidget {
                 "글쓰기",
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
-                  fontSize: 28,
+                  fontSize: 32,
                 ),
               ),
               SizedBox(height: 15),
@@ -196,7 +231,7 @@ class Messagetext extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 120,
+                height: 150,
                 width: 500,
                 child: SizedBox(
                   child: TextField(
@@ -218,27 +253,18 @@ class Messagetext extends StatelessWidget {
               //   },
               //   title: Text("작성"),
               // ),
-              //SizedBox(height: 10),
-              Center(
-                child: SizedBox(
-                  width: 200,
-                  height: 40,
-                  child: ElevatedButton(
+              SizedBox(height: 200),
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      style: ElevatedButton.styleFrom(
-                          primary: sscctalkPrimaryColor, elevation: 0),
-                      child: Text(
-                        "작성하기",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )),
-                ),
-              )
+                      style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                      child: Text("작성"))
+                ],
+              ),
               // Container(
               //   width: 100,
               //   child: ElevatedButton(
