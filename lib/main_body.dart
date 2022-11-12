@@ -19,29 +19,6 @@ class _MainBodyState extends State<MainBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(
-      //     'SSCC Talk',
-      //     style: TextStyle(
-      //       color: Colors.black,
-      //     ),
-      //   ),
-      //   centerTitle: true,
-      //   elevation: 0,
-      //   backgroundColor: sscctalkPrimaryColor,
-      //   actions: [
-      //     IconButton(
-      //       icon: Icon(Icons.settings),
-      //       color: Colors.black,
-      //       onPressed: (() {
-      //         Navigator.push(
-      //           context,
-      //           MaterialPageRoute(builder: (_) => SettingPage()),
-      //         );
-      //       }),
-      //     ),
-      //   ],
-      // ),
       body: IndexedStack(
         index: currentIndex,
         children: [

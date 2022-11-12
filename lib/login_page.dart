@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Text("로그인", style: TextStyle(fontSize: 21, color: Colors.black)),
         onPressed: () {
           // 로그인 버튼 누르면 메인 페이지로 이동
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (_) => MainBody()),
           );

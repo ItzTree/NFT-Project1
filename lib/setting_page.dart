@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'change_info.dart';
+import 'login_page.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -44,7 +45,10 @@ class SettingPage extends StatelessWidget {
               SizedBox(height: 32),
               ListTile(
                 onTap: () {
-                  Navigator.popUntil(context, (route) => route.isFirst);
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => LoginPage()));
                 },
                 title: Text("로그아웃"),
               ),

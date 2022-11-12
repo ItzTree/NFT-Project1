@@ -19,7 +19,7 @@ class PostPage extends StatelessWidget {
               color: Colors.black,
             )),
         title: Text(
-          'SSCC Talk',
+          'SSCC TALK',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
