@@ -129,7 +129,7 @@ class _FeedState extends State<Feed> {
               IconButton(
                 icon: Icon(CupertinoIcons.delete, color: Colors.black),
                 onPressed: () {
-                  deletepost(context);
+                  deletePost(context);
                 },
               ),
             ],
