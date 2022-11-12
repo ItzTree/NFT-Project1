@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sscc_talk/change_info.dart';
 import 'package:sscc_talk/main.dart';
 
-import 'change_info.dart';
 import 'login_page.dart';
 
 class SettingPage extends StatelessWidget {
@@ -17,6 +17,7 @@ class SettingPage extends StatelessWidget {
         iconTheme: IconThemeData(
           color: Colors.black,
         ),
+        //actionsIconTheme:
         title: Text(
           "SSCC TALK",
           style: TextStyle(
@@ -45,12 +46,7 @@ class SettingPage extends StatelessWidget {
               SizedBox(height: 32),
               ListTile(
                 onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
-                    ),
-                  );
+                  Navigator.popUntil(context, (route) => route.isFirst);
                 },
                 title: Text("로그아웃"),
               ),
