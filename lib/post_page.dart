@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'main.dart';
+import 'mainbody.dart';
 import 'setting_page.dart';
 
 class PostPage extends StatelessWidget {
@@ -13,7 +14,8 @@ class PostPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => MainBody()));
             },
             icon: Icon(
               Icons.arrow_back,
