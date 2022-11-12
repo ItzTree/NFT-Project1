@@ -1,10 +1,8 @@
-//import 'dart:js_util';
-//import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:sscc/notice_page.dart';
-import 'package:sscc/post_page.dart';
+
+import 'notice_page.dart';
+import 'post_page.dart';
 import 'main.dart';
-import 'main_body.dart';
 import 'setting_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -12,6 +10,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mobileWidth = MediaQuery.of(context).size.width;
+    var mobileHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -43,9 +44,9 @@ class HomePage extends StatelessWidget {
               alignment: AlignmentDirectional.center,
               children: [
                 Image.asset(
-                  "images/notice.png",
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 2.6,
+                  "assets/images/notice.png",
+                  width: mobileWidth,
+                  height: mobileHeight / 2.6,
                   fit: BoxFit.fill,
                 ),
                 GestureDetector(
@@ -54,51 +55,53 @@ class HomePage extends StatelessWidget {
                         MaterialPageRoute(builder: (_) => NoticePage()));
                   },
                   child: Container(
-                    width: MediaQuery.of(context).size.width - 100,
-                    height: MediaQuery.of(context).size.height / 4,
+                    width: mobileWidth - 100,
+                    height: mobileHeight / 4,
                     color: Colors.white,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            'SSCC 홈커밍이 찾아왔습니다! \n 1부 - 2022 해커톤 어쩌고저쩌고 2부 홈커밍데이 어쩌고 11월 19일',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'SSCC 홈커밍이 찾아왔습니다! \n 1부 - 2022 해커톤 어쩌고저쩌고 2부 홈커밍데이 어쩌고 11월 19일',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                              textAlign: TextAlign.left,
                             ),
-                            textAlign: TextAlign.left,
                           ),
-                        ),
-                        Divider(
-                          color: Colors.grey[800],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            'SSCC 번개모임 안내 \n 일시 : 11/9 수요일 18시, 장소 : 추후 공지 예정',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
+                          Divider(
+                            color: Colors.grey[800],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'SSCC 번개모임 안내 \n 일시 : 11/9 수요일 18시, 장소 : 추후 공지 예정',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                              textAlign: TextAlign.left,
                             ),
-                            textAlign: TextAlign.left,
                           ),
-                        ),
-                        Divider(
-                          color: Colors.grey[800],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            '해커톤 신청 기한 연장 공지 \n 기존 신청 기한 : 10/31 23:59 -> 변경된 어쩌고',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
+                          Divider(
+                            color: Colors.grey[800],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              '해커톤 신청 기한 연장 공지 \n 기존 신청 기한 : 10/31 23:59 -> 변경된 어쩌고',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                              textAlign: TextAlign.left,
                             ),
-                            textAlign: TextAlign.left,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 )
@@ -108,9 +111,9 @@ class HomePage extends StatelessWidget {
               alignment: AlignmentDirectional.center,
               children: [
                 Image.asset(
-                  "images/post.png",
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 2.6,
+                  "assets/images/post.png",
+                  width: mobileWidth,
+                  height: mobileHeight / 2.6,
                   fit: BoxFit.fill,
                 ),
                 GestureDetector(
@@ -119,51 +122,53 @@ class HomePage extends StatelessWidget {
                         context, MaterialPageRoute(builder: (_) => PostPage()));
                   },
                   child: Container(
-                    width: MediaQuery.of(context).size.width - 100,
-                    height: MediaQuery.of(context).size.height / 4,
+                    width: mobileWidth - 100,
+                    height: mobileHeight / 4,
                     color: Colors.white,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            'SSCC 홈커밍이 찾아왔습니다! \n 1부 - 2022 해커톤 어쩌고저쩌고 2부 홈커밍데이 어쩌고 11월 19일',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'SSCC 홈커밍이 찾아왔습니다! \n 1부 - 2022 해커톤 어쩌고저쩌고 2부 홈커밍데이 어쩌고 11월 19일',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                              textAlign: TextAlign.left,
                             ),
-                            textAlign: TextAlign.left,
                           ),
-                        ),
-                        Divider(
-                          color: Colors.grey[800],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            'SSCC 번개모임 안내 \n 일시 : 11/9 수요일 18시, 장소 : 추후 공지 예정',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
+                          Divider(
+                            color: Colors.grey[800],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'SSCC 번개모임 안내 \n 일시 : 11/9 수요일 18시, 장소 : 추후 공지 예정',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                              textAlign: TextAlign.left,
                             ),
-                            textAlign: TextAlign.left,
                           ),
-                        ),
-                        Divider(
-                          color: Colors.grey[800],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            '해커톤 신청 기한 연장 공지 \n 기존 신청 기한 : 10/31 23:59 -> 변경된 어쩌고',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
+                          Divider(
+                            color: Colors.grey[800],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              '해커톤 신청 기한 연장 공지 \n 기존 신청 기한 : 10/31 23:59 -> 변경된 어쩌고',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                              textAlign: TextAlign.left,
                             ),
-                            textAlign: TextAlign.left,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 )

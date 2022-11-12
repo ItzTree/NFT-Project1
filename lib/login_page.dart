@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:sscc_talk/main.dart';
-import 'package:sscc_talk/register_page.dart';
-import 'package:sscc_talk/main_body.dart';
+import 'main.dart';
+import 'register_page.dart';
+import 'main_body.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -68,7 +68,8 @@ class _LoginPageState extends State<LoginPage> {
         ),
         child: Text("로그인", style: TextStyle(fontSize: 21, color: Colors.black)),
         onPressed: () {
-          Navigator.pushReplacement(
+          // 로그인 버튼 누르면 메인 페이지로 이동
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (_) => MainBody()),
           );
@@ -76,30 +77,8 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    /// 회원가입 버튼 샘플 (수평)
-    var shiftToRegisterElevatedButtonInHorizontal = SizedBox(
-      width: 120,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: sscctalkPrimaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          elevation: 2,
-        ),
-        child:
-            Text("회원가입", style: TextStyle(fontSize: 21, color: Colors.black)),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => RegisterPage()),
-          );
-        },
-      ),
-    );
-
-    /// 회원가입 버튼 샘플 (수직)
-    var shiftToRegisterTextButtonInVertical = TextButton(
+    /// 회원가입 버튼
+    var shiftToRegisterTextButton = TextButton(
       style: ButtonStyle(
         overlayColor:
             MaterialStateColor.resolveWith((states) => Colors.black12),
@@ -116,42 +95,24 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
 
-    // DEBUG: horizontal / vertical
-    bool isHorizontal = false;
-
     return Scaffold(
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 48),
         child: Column(
           children: [
-            if (isHorizontal)
-              SizedBox(height: MediaQuery.of(context).size.height * 0.3)
-            else
-              SizedBox(height: MediaQuery.of(context).size.height * 0.25),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.25),
             ssccText,
             SizedBox(height: 32),
             idTextField,
             SizedBox(height: 8),
             passwordTextField,
             SizedBox(height: 32),
-            // 수평
-            if (isHorizontal)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  loginElevatedButton,
-                  SizedBox(width: 16),
-                  shiftToRegisterElevatedButtonInHorizontal,
-                ],
-              )
-            // 수직
-            else
-              Column(
-                children: [
-                  loginElevatedButton,
-                  shiftToRegisterTextButtonInVertical,
-                ],
-              ),
+            Column(
+              children: [
+                loginElevatedButton,
+                shiftToRegisterTextButton,
+              ],
+            ),
           ],
         ),
       ),

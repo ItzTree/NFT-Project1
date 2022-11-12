@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-// import 'package:sscc_talk/login_page.dart';
-import 'package:sscc_talk/main.dart';
+import 'main.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

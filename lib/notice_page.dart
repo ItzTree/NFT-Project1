@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sscc_talk/setting_page.dart';
 
 class NoticePage extends StatelessWidget {
   const NoticePage({Key? key}) : super(key: key);
@@ -28,21 +27,19 @@ class NoticePage extends StatelessWidget {
   }
 }
 
-//피드 클래스
+/// 피드 클래스
 class Feed extends StatefulWidget {
   const Feed({
     Key? key,
   }) : super(key: key);
 
   // 이미지를 담을 변수    아래가 private한 클래스여서!
-
   @override
   State<Feed> createState() => _FeedState();
 }
 
 class _FeedState extends State<Feed> {
-  //좋아요 여부
-  bool isFavorite = false;
+  bool isFavorite = false; // 좋아요 여부
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +48,7 @@ class _FeedState extends State<Feed> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          /// 제목
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
@@ -61,7 +59,7 @@ class _FeedState extends State<Feed> {
             ),
           ),
 
-          // 설명
+          /// 설명
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
@@ -69,7 +67,7 @@ class _FeedState extends State<Feed> {
             ),
           ),
 
-          // 날짜
+          /// 날짜
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
@@ -88,7 +86,7 @@ class _FeedState extends State<Feed> {
                 ),
                 onPressed: () {
                   setState(() {
-                    //build가 다시 호출된다.
+                    // build가 다시 호출된다.
                     isFavorite = !isFavorite;
                   });
                 },

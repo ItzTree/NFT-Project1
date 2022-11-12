@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sscc/post_page.dart';
-import 'package:sscc/setting_page.dart';
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+
+import 'post_page.dart';
 import 'home_page.dart';
 import 'main.dart';
 import 'notice_page.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
 class MainBody extends StatefulWidget {
   const MainBody({super.key});
@@ -14,7 +14,7 @@ class MainBody extends StatefulWidget {
 }
 
 class _MainBodyState extends State<MainBody> {
-  int currentIndex = 0;
+  int currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +58,7 @@ class _MainBodyState extends State<MainBody> {
     return ConvexAppBar(
       style: TabStyle.fixedCircle,
       backgroundColor: sscctalkPrimaryColor,
-
-      // color: Colors.white,
+      initialActiveIndex: currentIndex,
       items: [
         TabItem(
           icon: Icon(Icons.announcement_outlined, color: Colors.black),

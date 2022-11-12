@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+
 import 'main.dart';
-import 'main_body.dart';
 import 'setting_page.dart';
 
 class PostPage extends StatelessWidget {
