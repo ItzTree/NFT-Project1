@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sscc_talk/setting_page.dart';
 
 import 'main.dart';
+import 'mainbody.dart';
 
 class NoticePage extends StatelessWidget {
   const NoticePage({Key? key}) : super(key: key);
@@ -13,7 +14,8 @@ class NoticePage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => MainBody()));
             },
             icon: Icon(
               Icons.arrow_back,
