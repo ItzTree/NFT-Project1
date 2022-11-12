@@ -36,6 +36,7 @@ class _MainBodyState extends State<MainBody> {
       style: TabStyle.fixedCircle,
       backgroundColor: sscctalkPrimaryColor,
       initialActiveIndex: currentIndex,
+      color: Colors.white,
       items: [
         TabItem(
           icon: Icon(Icons.announcement_outlined, color: Colors.black38),

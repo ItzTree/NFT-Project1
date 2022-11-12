@@ -2,11 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sscc_talk/setting_page.dart';
 
-import 'change_info.dart';
 import 'comment_popup.dart';
 import 'main.dart';
 import 'main_body.dart';
-import 'mainbody.dart';
 
 class NoticePage extends StatelessWidget {
   const NoticePage({Key? key}) : super(key: key);

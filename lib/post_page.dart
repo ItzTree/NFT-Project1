@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'comment_popup.dart';
 import 'main.dart';
 import 'main_body.dart';
-import 'mainbody.dart';
 import 'setting_page.dart';
 
 class PostPage extends StatelessWidget {
