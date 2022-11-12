@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'change_info.dart';
-import 'login_page.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -16,6 +15,7 @@ class SettingPage extends StatelessWidget {
         iconTheme: IconThemeData(
           color: Colors.black,
         ),
+        //actionsIconTheme:
         title: Text(
           "SSCC TALK",
           style: TextStyle(
