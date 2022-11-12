@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sscc_talk/setting_page.dart';
 
 import 'main.dart';
-import 'mainbody.dart';
+import 'main_body.dart';
 
 class NoticePage extends StatelessWidget {
   const NoticePage({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class NoticePage extends StatelessWidget {
               color: Colors.black,
             )),
         title: Text(
-          'SSCC Talk',
+          'SSCC TALK',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -48,6 +48,7 @@ class NoticePage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'noticeFAB',
         onPressed: () {
           print("클릭 되었습니다.!");
         },

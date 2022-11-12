@@ -38,21 +38,29 @@ class _MainBodyState extends State<MainBody> {
       initialActiveIndex: currentIndex,
       items: [
         TabItem(
-          icon: Icon(Icons.announcement_outlined, color: Colors.black),
+          icon: Icon(Icons.announcement_outlined, color: Colors.black38),
           activeIcon: Icon(Icons.announcement_outlined, color: Colors.black),
         ),
         TabItem(
           icon: Icon(Icons.house, size: 36),
         ),
         TabItem(
-          icon: Icon(Icons.question_answer_outlined, color: Colors.black),
+          icon: Icon(Icons.question_answer_outlined, color: Colors.black38),
           activeIcon: Icon(Icons.question_answer_outlined, color: Colors.black),
         ),
       ],
       onTap: (newIndex) {
-        setState(() {
-          currentIndex = newIndex;
-        });
+        setState(
+          () {
+            if (newIndex == 0) {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => NoticePage()));
+            } else if (newIndex == 2) {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => PostPage()));
+            }
+          },
+        );
       },
     );
   }

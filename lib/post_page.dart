@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'main.dart';
-import 'mainbody.dart';
+import 'main_body.dart';
 import 'setting_page.dart';
 
 class PostPage extends StatelessWidget {
@@ -48,6 +48,7 @@ class PostPage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'postFAB',
         onPressed: () {
           print("클릭 되었습니다.!");
         },
