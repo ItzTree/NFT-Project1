@@ -1,40 +1,71 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sscc_talk/setting_page.dart';
 
+import 'change_info.dart';
 import 'comment_popup.dart';
 import 'main.dart';
+import 'main_body.dart';
+import 'mainbody.dart';
 
 class NoticePage extends StatelessWidget {
-  const NoticePage({super.key});
+  const NoticePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final List<String> textms = [
+      "SSCC 홈커밍 안내",
+      "SSCC 번개모임 안내",
+      "해커톤 신청 기한 연장 공지",
+      "[C++ 단기 속성 강좌 스터디 안내]"
+    ];
+    final List<String> textms2 = [
+      "SSCC 홈커밍이 찾아왔습니다! \n1부 - 2022 해커톤 발표평가회 / 15시 30분",
+      "일시: 11/9 수요일 18시 \n장소: 추후 공지 예정",
+      "기존 신청 기한: 10/31 23:59 -> 11/1 23:59",
+      "안녕하세요 여러분 AI유압학부 김민규와 C++단기 속성 강좌 스터디를 함께 하실 분들을 모집합니다. 많은 참여 바랍니다."
+    ];
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => MainBody()));
             },
             icon: Icon(
               Icons.arrow_back,
               color: Colors.black,
             )),
         title: Text(
-          '공 지 사 항',
+          '공지 사항',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         elevation: 0,
         backgroundColor: sscctalkPrimaryColor,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.settings),
+            color: Colors.black,
+            onPressed: (() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => SettingPage()),
+              );
+            }),
+          ),
+        ],
       ),
       body: ListView.builder(
-        itemCount: 10,
+        itemCount: textms.length,
         itemBuilder: (context, index) {
-          return Feed();
+          String textm = textms[index];
+          String textm2 = textms2[index];
+          return Feed(txtmessage: textm, txtmessage2: textm2);
         },
       ),
       floatingActionButton: FloatingActionButton(
-        heroTag: 'postFAB',
         onPressed: () {
           Navigator.push(
             context,
@@ -55,7 +86,12 @@ class NoticePage extends StatelessWidget {
 class Feed extends StatefulWidget {
   const Feed({
     Key? key,
+    required this.txtmessage,
+    required this.txtmessage2,
   }) : super(key: key);
+
+  final String txtmessage;
+  final String txtmessage2;
 
   // 이미지를 담을 변수    아래가 private한 클래스여서!
   @override
@@ -76,7 +112,7 @@ class _FeedState extends State<Feed> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "제목",
+              widget.txtmessage,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -87,7 +123,7 @@ class _FeedState extends State<Feed> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "My cat is docile even when bathed. I put a duck on his head in the wick and he's staring at me. Isn't it so cute??",
+              widget.txtmessage2,
             ),
           ),
 
@@ -102,6 +138,7 @@ class _FeedState extends State<Feed> {
             ),
           ),
           Row(
+            //아이콘들
             children: [
               IconButton(
                 icon: Icon(
@@ -175,7 +212,7 @@ class Messagetext extends StatelessWidget {
                 "글쓰기",
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
-                  fontSize: 28,
+                  fontSize: 32,
                 ),
               ),
               SizedBox(height: 15),
@@ -196,7 +233,7 @@ class Messagetext extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 120,
+                height: 150,
                 width: 500,
                 child: SizedBox(
                   child: TextField(
@@ -218,27 +255,18 @@ class Messagetext extends StatelessWidget {
               //   },
               //   title: Text("작성"),
               // ),
-              //SizedBox(height: 10),
-              Center(
-                child: SizedBox(
-                  width: 200,
-                  height: 40,
-                  child: ElevatedButton(
+              SizedBox(height: 200),
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      style: ElevatedButton.styleFrom(
-                          primary: sscctalkPrimaryColor, elevation: 0),
-                      child: Text(
-                        "작성하기",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )),
-                ),
-              )
+                      style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                      child: Text("작성"))
+                ],
+              ),
               // Container(
               //   width: 100,
               //   child: ElevatedButton(
