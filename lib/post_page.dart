@@ -128,7 +128,9 @@ class _FeedState extends State<Feed> {
               Spacer(),
               IconButton(
                 icon: Icon(CupertinoIcons.delete, color: Colors.black),
-                onPressed: () {},
+                onPressed: () {
+                  deletepost(context);
+                },
               ),
             ],
           ),
@@ -243,4 +245,47 @@ class Messagetext extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<dynamic> deletePost(BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) => AlertDialog(
+      content: Text("정말 삭제 하시겠어요?"),
+      actions: [
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+              Colors.white,
+            ),
+            elevation: MaterialStateProperty.all<double>(0),
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(
+            '네',
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.red,
+            ),
+          ),
+        ),
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+              Colors.white,
+            ),
+            elevation: MaterialStateProperty.all<double>(0),
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(
+            '아니오',
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
