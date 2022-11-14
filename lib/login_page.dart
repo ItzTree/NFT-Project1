@@ -12,8 +12,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController idController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  var idController = TextEditingController();
+  var passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
         labelStyle: TextStyle(color: Colors.black),
         contentPadding: EdgeInsets.symmetric(horizontal: 8),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.black),
+          borderSide: BorderSide(color: Colors.black), // 클릭 시 밑줄 색
         ),
       ),
       cursorColor: Colors.black,
@@ -62,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
         style: ElevatedButton.styleFrom(
           backgroundColor: sscctalkPrimaryColor,
           shape: RoundedRectangleBorder(
+            // 모서리가 둥글게
             borderRadius: BorderRadius.circular(30),
           ),
           elevation: 2,
@@ -80,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
     /// 회원가입 버튼
     var shiftToRegisterTextButton = TextButton(
       style: ButtonStyle(
-        overlayColor:
+        overlayColor: // 클릭 시 배경 색
             MaterialStateColor.resolveWith((states) => Colors.black12),
       ),
       child: Text(
@@ -88,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
         style: TextStyle(fontSize: 14, color: Colors.black),
       ),
       onPressed: () {
+        // 회원가입 페이지로 이동
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => RegisterPage()),

@@ -10,12 +10,11 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  TextEditingController idRegisterController = TextEditingController();
-  TextEditingController passwordRegisterController = TextEditingController();
-  TextEditingController againPasswordRegisterController =
-      TextEditingController();
-  TextEditingController nicknameRegisterController = TextEditingController();
-  TextEditingController emailRegisterController = TextEditingController();
+  var idRegisterController = TextEditingController();
+  var passwordRegisterController = TextEditingController();
+  var againPasswordRegisterController = TextEditingController();
+  var nicknameRegisterController = TextEditingController();
+  var emailRegisterController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
         labelStyle: TextStyle(color: Colors.black),
         contentPadding: EdgeInsets.symmetric(horizontal: 8),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.black),
+          borderSide: BorderSide(color: Colors.black), // 클릭 시 밑줄 색
         ),
       ),
       cursorColor: Colors.black,
@@ -91,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
       cursorColor: Colors.black,
     );
 
-    // 회원가입 버튼
+    /// 회원가입 버튼
     var registerElevatedButton = SizedBox(
       height: 50,
       width: 240,
@@ -99,14 +98,15 @@ class _RegisterPageState extends State<RegisterPage> {
         style: ElevatedButton.styleFrom(
           backgroundColor: sscctalkPrimaryColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(30), // 모서리 둥글게
           ),
           elevation: 2,
         ),
         child:
             Text("회원가입", style: TextStyle(fontSize: 24, color: Colors.black)),
         onPressed: () {
-          print("회원가입 버튼 누름");
+          CustomSnackBar().showSnackBar(context); // 회원가입 성공!
+          Navigator.pop(context);
         },
       ),
     );
@@ -120,13 +120,7 @@ class _RegisterPageState extends State<RegisterPage> {
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 1,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          color: Colors.black,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        iconTheme: IconThemeData(color: Colors.black), // 뒤로 가기
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 48),
@@ -156,5 +150,38 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+}
+
+class CustomSnackBar extends StatelessWidget {
+  const CustomSnackBar({super.key});
+
+  final successColor = const Color(0xFFA6FBA6);
+
+  void showSnackBar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Row(
+        children: [
+          Icon(Icons.check_circle_outline, color: successColor),
+          SizedBox(width: 10),
+          Text("회원가입 성공!", style: TextStyle(color: Colors.black, fontSize: 16)),
+        ],
+      ),
+      backgroundColor: Colors.white,
+      behavior: SnackBarBehavior.floating,
+      duration: Duration(seconds: 2),
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+        side: BorderSide(color: sscctalkPrimaryColor, width: 3),
+      ),
+      margin: EdgeInsets.fromLTRB(100, 0, 100, 30),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

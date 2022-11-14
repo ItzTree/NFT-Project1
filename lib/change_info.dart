@@ -1,21 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ChangeInfoPage(),
-    );
-  }
-}
-
 class ChangeInfoPage extends StatefulWidget {
   const ChangeInfoPage({super.key});
 
@@ -29,11 +13,10 @@ class _ChangeInfoPageState extends State<ChangeInfoPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        iconTheme: IconThemeData(
-          color: Colors.black,
-        ),
+        iconTheme: IconThemeData(color: Colors.black), // 뒤로 가기
+        elevation: 1,
         title: Text(
-          "정보변경",
+          "정 보 변 경",
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -44,26 +27,29 @@ class _ChangeInfoPageState extends State<ChangeInfoPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          /// 아이디 표시
           ListTile(
             title: Text("ID"),
-            subtitle: Text("Original ID"), //현재
+            subtitle: Text("ssccTalk123"), // 로그인한 아이디
+            onTap: () {},
+          ),
+
+          /// 닉네임 변경
+          ListTile(
+            title: Text("닉네임"),
+            subtitle: Text("닉네임 변경하기"),
             onTap: () {
-              print("change ID");
+              // 닉네임 변경 팝업
             },
-            //바꿀 아이디 바로 적도록?
           ),
+
+          /// 비밀번호 변경
           ListTile(
-            title: Text("NickName"),
-            subtitle: Text("Original Nickname"), //현재
-            onTap: () {},
-            //바꿀 닉네임 바로 적을 수 있게 팝업 띄우기?
-          ),
-          ListTile(
-            title: Text("Password"),
-            subtitle: Text("Original Password"),
-            onTap: () {},
-            //현재 비밀번호 표시???
-            //바꿀 비밀번호 설정
+            title: Text("비밀번호"),
+            subtitle: Text("비밀번호 변경하기"),
+            onTap: () {
+              // 비밀번호 변경 팝업
+            },
           ),
         ],
       ),
