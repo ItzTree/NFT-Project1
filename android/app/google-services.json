@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "235240112575",
+    "project_id": "sscctalkproject",
+    "storage_bucket": "sscctalkproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235240112575:android:b47294f7c2ee11b20ee10a",
+        "android_client_info": {
+          "package_name": "com.example.sscc_talk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "235240112575-q566r617a4nr3gdpk0abgmobv2ervjnq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuCkCI7MXp_-pmACFOei4Noa2puCf8cbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "235240112575-q566r617a4nr3gdpk0abgmobv2ervjnq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
