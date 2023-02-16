@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'main.dart';
+import 'data/color_palette.dart';
 
 class CommentUI extends StatelessWidget {
   const CommentUI({Key? key}) : super(key: key);
