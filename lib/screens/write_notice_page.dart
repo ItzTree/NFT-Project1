@@ -18,10 +18,10 @@ class _WriteNoticePageState extends State<WriteNoticePage> {
       appBar: AppBar(
         title: Text(
           "글 쓰 기",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: sscctalkPrimaryColor,
         iconTheme: IconThemeData(color: Colors.black),
       ),
       body: SafeArea(
