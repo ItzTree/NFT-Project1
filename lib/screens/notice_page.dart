@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../data/color_palette.dart';
 
 /*
 - 데이터베이스와 연동하기
@@ -9,6 +12,7 @@ class NoticePage extends StatelessWidget {
   const NoticePage({super.key});
 
   final List<Map<String, dynamic>> posts = const [
+    // Map 자료형 post 선언!!
     {
       'title': "SSCC 홈커밍 안내",
       'content': "SSCC 홈커밍이 찾아왔습니다! \n1부 - 2022 해커톤 발표평가회 / 15시 30분",
@@ -38,12 +42,10 @@ class NoticePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "공 지 사 항",
-          style: TextStyle(
-            color: Colors.black,
-          ),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: sscctalkPrimaryColor,
         elevation: 2,
 
         /// 글 쓰기 버튼
@@ -77,6 +79,7 @@ class NoticePage extends StatelessWidget {
 
 class NoticeBox extends StatefulWidget {
   const NoticeBox({
+    //생성자(title, content, date) 3가지 초기화
     Key? key,
     required this.title,
     required this.content,
@@ -92,261 +95,103 @@ class NoticeBox extends StatefulWidget {
 }
 
 class _NoticeBoxState extends State<NoticeBox> {
-  bool isChecked = false;
+  bool isChecked = false; //필드: 체크표시
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: const EdgeInsets.fromLTRB(30, 30, 25,
+          0), //padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16), fromLTRB(25, 10, 25, 0)
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             widget.title,
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Text(widget.content),
-          Text(widget.date),
+          Text(
+            widget.date,
+            style: TextStyle(color: Colors.grey),
+          ),
+          Row(
+            children: [
+              IconButton(
+                icon: Icon(
+                  CupertinoIcons.checkmark,
+                  color: isChecked ? Colors.blue : Colors.black,
+                ),
+                onPressed: () {
+                  setState(() {
+                    //build가 다시 호출된다.
+                    isChecked = !isChecked;
+                  });
+                },
+              ),
+              Spacer(),
+              IconButton(
+                icon: Icon(CupertinoIcons.delete, color: Colors.black),
+                onPressed: () {
+                  deletePost(context);
+                },
+              ),
+            ],
+          ),
         ],
       ),
     );
   }
 }
 
+// 삭제 확인 함수
+Future<dynamic> deletePost(BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) => AlertDialog(
+      content: Text(
+        "정말 삭제 하시겠어요?",
+        style: TextStyle(fontSize: 16),
+      ),
+      actions: [
+        /// 네
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+              Colors.white,
+            ),
+            elevation: MaterialStateProperty.all<double>(0),
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(
+            '네',
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.red,
+            ),
+          ),
+        ),
 
-
-
-
-// class _FeedState extends State<Feed> {
-//   bool isChecked = false; // 확인 여부
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           /// 제목
-//           Padding(
-//             padding: const EdgeInsets.all(8.0),
-//             child: Text(
-//               widget.title,
-//               style: TextStyle(
-//                 fontWeight: FontWeight.bold,
-//               ),
-//             ),
-//           ),
-
-//           /// 설명
-//           Padding(
-//             padding: const EdgeInsets.all(8.0),
-//             child: Text(
-//               widget.content,
-//             ),
-//           ),
-
-//           /// 날짜
-//           Padding(
-//             padding: const EdgeInsets.all(8.0),
-//             child: Text(
-//               widget.date,
-//               style: TextStyle(
-//                 color: Colors.grey,
-//               ),
-//             ),
-//           ),
-
-//           /// 아이콘
-//           Row(
-//             children: [
-//               /// 읽음 표시
-//               IconButton(
-//                 icon: Icon(
-//                   CupertinoIcons.checkmark,
-//                   color: isChecked ? Colors.blue : Colors.black,
-//                 ),
-//                 onPressed: () {
-//                   setState(() {
-//                     isChecked = !isChecked;
-//                   });
-//                 },
-//               ),
-
-//               /// 댓글
-//               IconButton(
-//                 icon: Icon(CupertinoIcons.chat_bubble, color: Colors.black),
-//                 onPressed: () {
-//                   showDialog(
-//                     context: context,
-//                     builder: (context) {
-//                       return CommentUI();
-//                     },
-//                   );
-//                 },
-//               ),
-//               Spacer(),
-
-//               /// 삭제
-//               IconButton(
-//                 icon: Icon(CupertinoIcons.delete, color: Colors.black),
-//                 onPressed: () {
-//                   deletePost(context);
-//                 },
-//               ),
-//             ],
-//           ),
-//           Divider()
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// /// 글쓰기 화면
-// class Messagetext extends StatelessWidget {
-//   const Messagetext({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor: Colors.white,
-//         centerTitle: true,
-//         elevation: 1,
-//         iconTheme: IconThemeData(color: Colors.black),
-//         title: Text(
-//           "SSCC TALK",
-//           style: TextStyle(
-//             fontSize: 18,
-//             color: Colors.black,
-//             fontWeight: FontWeight.bold,
-//           ),
-//         ),
-//       ),
-//       body: SafeArea(
-//         child: SingleChildScrollView(
-//           padding: const EdgeInsets.all(25),
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Text(
-//                 "글쓰기",
-//                 style: TextStyle(
-//                   fontWeight: FontWeight.w900,
-//                   fontSize: 28,
-//                 ),
-//               ),
-//               SizedBox(height: 15),
-
-//               /// 제목
-//               SizedBox(
-//                 height: 65,
-//                 width: 500,
-//                 child: TextField(
-//                   keyboardType: TextInputType.multiline,
-//                   maxLines: null,
-//                   obscureText: false,
-//                   maxLength: 30,
-//                   decoration: InputDecoration(
-//                       hintText: "제목",
-//                       counterText: '',
-//                       focusedBorder: UnderlineInputBorder(
-//                           borderSide: BorderSide(color: Colors.black))),
-//                 ),
-//               ),
-
-//               /// 내용
-//               SizedBox(
-//                 width: 500,
-//                 child: TextField(
-//                   keyboardType: TextInputType.multiline,
-//                   maxLines: null,
-//                   obscureText: false,
-//                   decoration: InputDecoration(
-//                     hintText: "내용",
-//                     focusedBorder: UnderlineInputBorder(
-//                       borderSide: BorderSide(color: Colors.black),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//               SizedBox(height: 30),
-
-//               /// 작성하기 버튼
-//               Center(
-//                 child: SizedBox(
-//                   width: 200,
-//                   height: 40,
-//                   child: ElevatedButton(
-//                     onPressed: () {
-//                       Navigator.pop(context);
-//                     },
-//                     style: ElevatedButton.styleFrom(
-//                         backgroundColor: sscctalkPrimaryColor, elevation: 0),
-//                     child: Text(
-//                       "작성하기",
-//                       style: TextStyle(
-//                         color: Colors.black,
-//                         fontSize: 15,
-//                         fontWeight: FontWeight.bold,
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// Future<dynamic> deletePost(BuildContext context) {
-//   return showDialog(
-//     context: context,
-//     builder: (BuildContext context) => AlertDialog(
-//       content: Text(
-//         "정말 삭제 하시겠어요?",
-//         style: TextStyle(fontSize: 16),
-//       ),
-//       actions: [
-//         /// 네
-//         ElevatedButton(
-//           style: ButtonStyle(
-//             backgroundColor: MaterialStateProperty.all<Color>(
-//               Colors.white,
-//             ),
-//             elevation: MaterialStateProperty.all<double>(0),
-//           ),
-//           onPressed: () => Navigator.of(context).pop(),
-//           child: Text(
-//             '네',
-//             style: TextStyle(
-//               fontSize: 15,
-//               color: Colors.red,
-//             ),
-//           ),
-//         ),
-
-//         /// 아니오
-//         ElevatedButton(
-//           style: ButtonStyle(
-//             backgroundColor: MaterialStateProperty.all<Color>(
-//               Colors.white,
-//             ),
-//             elevation: MaterialStateProperty.all<double>(0),
-//           ),
-//           onPressed: () => Navigator.of(context).pop(),
-//           child: Text(
-//             '아니오',
-//             style: TextStyle(
-//               fontSize: 15,
-//               color: Colors.black,
-//             ),
-//           ),
-//         ),
-//       ],
-//     ),
-//   );
-// }
+        /// 아니오
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+              Colors.white,
+            ),
+            elevation: MaterialStateProperty.all<double>(0),
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(
+            '아니오',
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
