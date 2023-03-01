@@ -6,7 +6,6 @@ import 'package:sscc_talk/services/auth_service.dart';
 import '../data/color_palette.dart';
 
 import 'register_page.dart';
-import 'main_body.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
