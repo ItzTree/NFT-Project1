@@ -16,9 +16,10 @@ class MainBody extends StatefulWidget {
 }
 
 class _MainBodyState extends State<MainBody> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 0; // 페이지 번호
 
   final List<Widget> _pageList = <Widget>[
+    //페이지리스트
     HomePage(),
     NoticePage(),
     PostPage(),
@@ -28,7 +29,7 @@ class _MainBodyState extends State<MainBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pageList.elementAt(_selectedIndex),
+      body: _pageList.elementAt(_selectedIndex), //여기서 페이지 출력된다!
 
       /// bottomNavigationBar
       bottomNavigationBar: Padding(
