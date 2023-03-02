@@ -56,7 +56,7 @@ class PostPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "자 유 게 시 판",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: sscctalkPrimaryColor,
@@ -69,7 +69,7 @@ class PostPage extends StatelessWidget {
               Navigator.pushNamed(context, '/notice/write_notice');
             },
             icon: Icon(Icons.edit),
-            color: Colors.black,
+            color: Colors.white,
             iconSize: 32,
           ),
         ],

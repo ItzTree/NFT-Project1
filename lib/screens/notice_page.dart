@@ -1,110 +1,112 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../data/color_palette.dart';
-
-/*
-- 데이터베이스와 연동하기
-- 글을 쓰면 내용이 데이터베이스에 올라가고 목록으로 돌아오기
-*/
+import '../services/auth_service.dart';
+import '../services/notice_service.dart';
 
 class NoticePage extends StatelessWidget {
   const NoticePage({super.key});
 
-  final List<Map<String, dynamic>> posts = const [
-    // Map 자료형 post 선언!!
-    {
-      'title': "SSCC 홈커밍 안내",
-      'content': "SSCC 홈커밍이 찾아왔습니다! \n1부 - 2022 해커톤 발표평가회 / 15시 30분",
-      'date': '2022/11/03 22:12',
-    },
-    {
-      'title': "SSCC 번개모임 안내",
-      'content': "일시: 11/9 수요일 18시 \n장소: 추후 공지 예정",
-      'date': '2022/11/03 11:15',
-    },
-    {
-      'title': "해커톤 신청 기한 연장 공지",
-      'content': "기존 신청 기한: 10/31 23:59 -> 11/1 23:59",
-      'date': '2022/10/31 23:42',
-    },
-    {
-      'title': "[C++ 단기 속성 강좌 스터디 안내]",
-      'content':
-          "안녕하세요 여러분 AI융햡학부 김민규와 C++단기 속성 강좌 스터디를 함께 하실 분들을 모집합니다. 많은 참여 바랍니다.",
-      'date': '2022/10/31 15:44',
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "공 지 사 항",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: sscctalkPrimaryColor,
-        elevation: 2,
+    final authService = context.read<AuthService>();
+    final user = authService.currentUser()!;
 
-        /// 글 쓰기 버튼
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/notice/write_notice');
-            },
-            icon: Icon(Icons.edit),
-            color: Colors.black,
-            iconSize: 32,
+    return Consumer<NoticeService>(
+      builder: (context, noticeService, child) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              "공 지 사 항",
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            centerTitle: true,
+            backgroundColor: sscctalkPrimaryColor,
+            elevation: 2,
+
+            /// 글 쓰기 버튼
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/notice/write_notice');
+                },
+                icon: Icon(Icons.edit),
+                color: Colors.white,
+                iconSize: 32,
+              ),
+            ],
           ),
-        ],
-      ),
-      body: ListView.separated(
-        itemCount: posts.length,
-        itemBuilder: (context, index) {
-          final post = posts[index];
-          final title = post['title'] ?? "Title";
-          final content = post['content'] ?? "Content";
-          final date = post['date'] ?? "2000/01/01 00:00";
-          return NoticeBox(title: title, content: content, date: date);
-        },
-        separatorBuilder: (context, index) {
-          return Divider();
-        },
-      ),
+
+          /// 공지글 목록
+          body: FutureBuilder<QuerySnapshot>(
+            future: noticeService.read(),
+            builder: (context, snapshot) {
+              final notices = snapshot.data?.docs ?? [];
+              return ListView.separated(
+                itemCount: notices.length,
+                itemBuilder: (context, index) {
+                  final notice = notices[index];
+
+                  String title = notice.get('title');
+                  String content = notice.get('content');
+                  bool isChecked = notice.get('check');
+                  String date = notice.get('date');
+
+                  return NoticeBox(
+                    title: title,
+                    content: content,
+                    date: date,
+                    noticeService: noticeService,
+                    noticeId: notice.id,
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return Divider();
+                },
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }
 
 class NoticeBox extends StatefulWidget {
   const NoticeBox({
-    //생성자(title, content, date) 3가지 초기화
     Key? key,
     required this.title,
     required this.content,
     required this.date,
+    required this.noticeService,
+    required this.noticeId,
   }) : super(key: key);
 
   final String title;
   final String content;
   final String date;
+  final NoticeService noticeService;
+  final String noticeId;
 
   @override
   State<NoticeBox> createState() => _NoticeBoxState();
 }
 
 class _NoticeBoxState extends State<NoticeBox> {
-  bool isChecked = false; //필드: 체크표시
+  bool isChecked = false; // 필드: 체크표시
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(30, 30, 25,
-          0), //padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16), fromLTRB(25, 10, 25, 0)
+      padding: const EdgeInsets.fromLTRB(30, 30, 25, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          /// 제목
           Text(
             widget.title,
             style: TextStyle(
@@ -112,13 +114,19 @@ class _NoticeBoxState extends State<NoticeBox> {
               fontWeight: FontWeight.bold,
             ),
           ),
+
+          /// 내용
           Text(widget.content),
+
+          /// 날짜
           Text(
             widget.date,
             style: TextStyle(color: Colors.grey),
           ),
+
           Row(
             children: [
+              /// 체크 표시
               IconButton(
                 icon: Icon(
                   CupertinoIcons.checkmark,
@@ -126,16 +134,17 @@ class _NoticeBoxState extends State<NoticeBox> {
                 ),
                 onPressed: () {
                   setState(() {
-                    //build가 다시 호출된다.
                     isChecked = !isChecked;
                   });
                 },
               ),
               Spacer(),
+
+              /// 삭제 버튼
               IconButton(
                 icon: Icon(CupertinoIcons.delete, color: Colors.black),
                 onPressed: () {
-                  deletePost(context);
+                  deletePost(context, widget.noticeService, widget.noticeId);
                 },
               ),
             ],
@@ -146,8 +155,12 @@ class _NoticeBoxState extends State<NoticeBox> {
   }
 }
 
-// 삭제 확인 함수
-Future<dynamic> deletePost(BuildContext context) {
+/// 삭제 확인 함수
+Future<dynamic> deletePost(
+  BuildContext context,
+  NoticeService noticeService,
+  String noticeId,
+) {
   return showDialog(
     context: context,
     builder: (BuildContext context) => AlertDialog(
@@ -164,7 +177,10 @@ Future<dynamic> deletePost(BuildContext context) {
             ),
             elevation: MaterialStateProperty.all<double>(0),
           ),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: (() {
+            noticeService.delete(noticeId);
+            Navigator.of(context).pop();
+          }),
           child: Text(
             '네',
             style: TextStyle(

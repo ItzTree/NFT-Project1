@@ -62,43 +62,44 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     /// 로그인 버튼
-    var loginElevatedButton =
-        Consumer<AuthService>(builder: (context, authService, child) {
-      return SizedBox(
-        width: screenWidth * 0.55,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: sscctalkPrimaryColorLight,
-            shape: RoundedRectangleBorder(
-              // 모서리가 둥글게
-              borderRadius: BorderRadius.circular(30),
+    var loginElevatedButton = Consumer<AuthService>(
+      builder: (context, authService, child) {
+        return SizedBox(
+          width: screenWidth * 0.55,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: sscctalkPrimaryColorLight,
+              shape: RoundedRectangleBorder(
+                // 모서리가 둥글게
+                borderRadius: BorderRadius.circular(30),
+              ),
+              elevation: 2,
             ),
-            elevation: 2,
+            child: Text("로그인",
+                style: TextStyle(fontSize: 21, color: Colors.black)),
+            onPressed: () {
+              // 로그인 버튼 누르면 메인 페이지로 이동
+              authService.signIn(
+                email: emailController.text,
+                password: passwordController.text,
+                onSuccess: () {
+                  // 로그인 성공
+                  CustomSnackBar(
+                    snackBarText: "로그인 성공",
+                  ).showSnackBar(context);
+                  Navigator.of(context).pushReplacementNamed('/main');
+                },
+                onError: (err) {
+                  CustomSnackBar(
+                    snackBarText: "에러: $err",
+                  ).showSnackBar(context);
+                },
+              );
+            },
           ),
-          child:
-              Text("로그인", style: TextStyle(fontSize: 21, color: Colors.black)),
-          onPressed: () {
-            // 로그인 버튼 누르면 메인 페이지로 이동
-            authService.signIn(
-              email: emailController.text,
-              password: passwordController.text,
-              onSuccess: () {
-                // 로그인 성공
-                CustomSnackBar(
-                  snackBarText: "로그인 성공",
-                ).showSnackBar(context);
-                Navigator.of(context).pushReplacementNamed('/main');
-              },
-              onError: (err) {
-                CustomSnackBar(
-                  snackBarText: "에러: $err",
-                ).showSnackBar(context);
-              },
-            );
-          },
-        ),
-      );
-    });
+        );
+      },
+    );
 
     /// 회원가입 버튼
     var shiftToRegisterTextButton = TextButton(

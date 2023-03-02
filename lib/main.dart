@@ -7,6 +7,7 @@ import 'services/auth_service.dart';
 
 import 'screens/login_page.dart';
 import 'screens/write_notice_page.dart';
+import 'services/notice_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // main 함수에서 async 사용하기 위해
@@ -15,6 +16,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AuthService()),
+        ChangeNotifierProvider(create: (context) => NoticeService()),
       ],
       child: MyApp(),
     ),

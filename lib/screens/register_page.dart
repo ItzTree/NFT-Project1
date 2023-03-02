@@ -93,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
             elevation: 2,
           ),
           child:
-              Text("회원가입", style: TextStyle(fontSize: 24, color: Colors.black)),
+              Text("회원가입", style: TextStyle(fontSize: 22, color: Colors.white)),
           onPressed: () {
             authService.signUp(
               email: emailRegisterController.text,
@@ -110,8 +110,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ).showSnackBar(context);
               },
             );
-            // CustomSnackBar().showSnackBar(context); // 회원가입 성공!
-            // Navigator.pop(context);
           },
         ),
       );
