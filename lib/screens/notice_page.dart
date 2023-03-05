@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:sscc_talk/services/notice_service.dart';
 import '../data/color_palette.dart';
-import '../services/auth_service.dart';
+import 'package:sscc_talk/services/auth_service.dart';
 import '../services/notice_service.dart';
 
 class NoticePage extends StatelessWidget {
@@ -97,8 +99,8 @@ class NoticeBox extends StatefulWidget {
 }
 
 class _NoticeBoxState extends State<NoticeBox> {
-  bool isChecked = false; // 필드: 체크표시
-
+  final noticeCollection = FirebaseFirestore.instance.collection('notice');
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -127,17 +129,18 @@ class _NoticeBoxState extends State<NoticeBox> {
           Row(
             children: [
               /// 체크 표시
-              IconButton(
-                icon: Icon(
-                  CupertinoIcons.checkmark,
-                  color: isChecked ? Colors.blue : Colors.black,
-                ),
-                onPressed: () {
-                  setState(() {
+              Consumer<NoticeService>(builder: (context, noticeService, _) {
+                return IconButton(
+                  onPressed: () {
                     isChecked = !isChecked;
-                  });
-                },
-              ),
+                    noticeService.update(widget.noticeId, isChecked);
+                  },
+                  icon: Icon(
+                    CupertinoIcons.checkmark,
+                    color: isChecked ? Colors.blue : Colors.black,
+                  ),
+                );
+              }),
               Spacer(),
 
               /// 삭제 버튼

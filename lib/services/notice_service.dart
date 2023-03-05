@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NoticeService extends ChangeNotifier {
   final noticeCollection = FirebaseFirestore.instance.collection('notice');
@@ -21,7 +23,24 @@ class NoticeService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void update(String docId, bool isDone) async {
+  Future<void> update(String docId, bool isChecked) async {
+    // DocumentSnapshot snapshot = await noticeCollection.doc(docId).get();
+    // isChecked = !isChecked;
+    // if (snapshot.exists) {
+    //   await noticeCollection.doc(docId).update({'check': isChecked});
+    // }
+
+    final noticeDoc = noticeCollection.doc(docId);
+    if (isChecked == true) {
+      await noticeDoc.update({'check': true});
+    }
+    await noticeDoc.update({'check': false});
+
+    // _isChecked = isChecked;
+    // notifyListeners();
+
+    notifyListeners();
+
     // 확인 표시 갱신
   }
 
