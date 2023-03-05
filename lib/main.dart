@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sscc_talk/screens/main_body.dart';
 
+import 'screens/write_post_page.dart';
 import 'services/auth_service.dart';
 
 import 'screens/login_page.dart';
 import 'screens/write_notice_page.dart';
 import 'services/notice_service.dart';
+import 'services/post_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // main 함수에서 async 사용하기 위해
@@ -17,6 +19,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthService()),
         ChangeNotifierProvider(create: (context) => NoticeService()),
+        ChangeNotifierProvider(create: (context) => PostService()),
       ],
       child: MyApp(),
     ),
@@ -39,6 +42,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => LoginPage(),
         '/main': (context) => MainBody(),
         '/notice/write_notice': (context) => WriteNoticePage(),
+        '/post/write_post': (context) => WritePostPage(),
       },
     );
   }

@@ -57,6 +57,7 @@ class NoticePage extends StatelessWidget {
                   String date = notice.get('date');
 
                   return NoticeBox(
+                    //공지 글상자(제목+내용,체크 버튼과 삭제버튼)
                     title: title,
                     content: content,
                     date: date,
