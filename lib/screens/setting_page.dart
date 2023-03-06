@@ -48,8 +48,8 @@ class SettingPage extends StatelessWidget {
                 /// 로그아웃
                 ListTile(
                   onTap: () {
-                    authService.signOut();
                     Navigator.pushReplacementNamed(context, '/');
+                    authService.signOut();
                   },
                   title: Text("로그아웃"),
                 ),

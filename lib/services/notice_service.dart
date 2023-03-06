@@ -6,17 +6,18 @@ class NoticeService extends ChangeNotifier {
 
   Future<QuerySnapshot> read() async {
     // 공지사항 글 가져오기
-    return noticeCollection.get();
+    return noticeCollection.orderBy('date', descending: true).get();
   }
 
-  void create(String title, String content, bool check, String uid) async {
+  void create(
+      String title, String content, bool check, String uid, String date) async {
     // 공지사항 글 작성하기
     await noticeCollection.add({
       'uid': uid,
       'title': title,
       'content': content,
       'check': check,
-      'date': "2023/01/01 12:34",
+      'date': date,
     });
     notifyListeners();
   }

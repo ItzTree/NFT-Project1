@@ -45,29 +45,36 @@ class NoticePage extends StatelessWidget {
           body: FutureBuilder<QuerySnapshot>(
             future: noticeService.read(),
             builder: (context, snapshot) {
-              final notices = snapshot.data?.docs ?? [];
-              return ListView.separated(
-                itemCount: notices.length,
-                itemBuilder: (context, index) {
-                  final notice = notices[index];
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                // 로딩 중
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                final notices = snapshot.data?.docs ?? [];
+                return ListView.separated(
+                  itemCount: notices.length,
+                  itemBuilder: (context, index) {
+                    final notice = notices[index];
 
-                  String title = notice.get('title');
-                  String content = notice.get('content');
-                  bool isChecked = notice.get('check');
-                  String date = notice.get('date');
+                    String title = notice.get('title');
+                    String content = notice.get('content');
+                    bool isChecked = notice.get('check');
+                    String date = notice.get('date');
 
-                  return NoticeBox(
-                    title: title,
-                    content: content,
-                    date: date,
-                    noticeService: noticeService,
-                    noticeId: notice.id,
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Divider();
-                },
-              );
+                    return NoticeBox(
+                      title: title,
+                      content: content,
+                      date: date,
+                      noticeService: noticeService,
+                      noticeId: notice.id,
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return Divider();
+                  },
+                );
+              }
             },
           ),
         );
