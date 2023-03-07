@@ -102,6 +102,7 @@ class NoticeBox extends StatefulWidget {
 class _NoticeBoxState extends State<NoticeBox> {
   final noticeCollection = FirebaseFirestore.instance.collection('notice');
   bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -145,10 +146,22 @@ class _NoticeBoxState extends State<NoticeBox> {
               Spacer(),
 
               /// 삭제 버튼
-              IconButton(
-                icon: Icon(CupertinoIcons.delete, color: Colors.black),
-                onPressed: () {
-                  deletePost(context, widget.noticeService, widget.noticeId);
+              Consumer<NoticeService>(
+                builder: (context, noticeService, _) {
+                  if (noticeCollection.id == widget.noticeId) {
+                    return IconButton(
+                      icon: Icon(CupertinoIcons.delete, color: Colors.black),
+                      onPressed: () {
+                        deletePost(
+                            context, widget.noticeService, widget.noticeId);
+                      },
+                    );
+                  } else {
+                    return IconButton(
+                      icon: Icon(CupertinoIcons.delete, color: Colors.white),
+                      onPressed: null,
+                    );
+                  }
                 },
               ),
             ],

@@ -46,6 +46,7 @@ class NoticeService extends ChangeNotifier {
 
   void delete(String docId) async {
     // 공지사항 글 삭제
+
     await noticeCollection.doc(docId).delete();
     notifyListeners();
   }
