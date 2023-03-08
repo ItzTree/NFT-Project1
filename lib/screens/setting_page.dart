@@ -111,14 +111,6 @@ Future<dynamic> dialogWithdraw(BuildContext context) {
           ),
           onPressed: () {
             // do withdraw
-            // if (isWithdrawed) { // 회원탈퇴 성공하면
-            // Navigator.popUntil(context, (route) => route.isFirst);
-            // Navigator.pushReplacement(
-            //     context, MaterialPageRoute(builder: (context) => LoginPage()));
-            // } else {
-            //   // Message: 회원가입 실패
-            //   Navigator.pop(context);
-            // }
             Navigator.of(context).pop();
           },
           child: Text(

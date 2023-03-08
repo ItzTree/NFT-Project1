@@ -22,8 +22,10 @@ class NoticeService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void update(String docId, bool isDone) async {
+  Future<void> update(String docId, bool isChecked) async {
     // 확인 표시 갱신
+    await noticeCollection.doc(docId).update({'check': isChecked});
+    notifyListeners();
   }
 
   void delete(String docId) async {
