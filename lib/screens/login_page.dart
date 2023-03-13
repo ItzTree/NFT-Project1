@@ -63,6 +63,7 @@ class _LoginPageState extends State<LoginPage> {
 
     /// 로그인 버튼
     var loginElevatedButton = Consumer<AuthService>(
+      // main의 AuthSercice가 호출
       builder: (context, authService, child) {
         return SizedBox(
           width: screenWidth * 0.55,
@@ -80,6 +81,7 @@ class _LoginPageState extends State<LoginPage> {
             onPressed: () {
               // 로그인 버튼 누르면 메인 페이지로 이동
               authService.signIn(
+                //로그인 함수!!
                 email: emailController.text,
                 password: passwordController.text,
                 onSuccess: () {
