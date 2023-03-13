@@ -1,21 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sscc_talk/services/notice_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../data/color_palette.dart';
-import 'package:sscc_talk/services/auth_service.dart';
+
+import '../services/auth_service.dart';
 import '../services/notice_service.dart';
+
+late dynamic authService;
+late dynamic user;
 
 class NoticePage extends StatelessWidget {
   const NoticePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final authService = context.read<AuthService>();
-    final user = authService.currentUser()!;
+    authService = context.read<AuthService>();
+    user = authService.currentUser()!;
 
     return Consumer<NoticeService>(
       builder: (context, noticeService, child) {
@@ -47,29 +50,38 @@ class NoticePage extends StatelessWidget {
           body: FutureBuilder<QuerySnapshot>(
             future: noticeService.read(),
             builder: (context, snapshot) {
-              final notices = snapshot.data?.docs ?? [];
-              return ListView.separated(
-                itemCount: notices.length,
-                itemBuilder: (context, index) {
-                  final notice = notices[index];
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                // 로딩 중
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                final notices = snapshot.data?.docs ?? [];
+                return ListView.separated(
+                  itemCount: notices.length,
+                  itemBuilder: (context, index) {
+                    final notice = notices[index];
 
-                  String title = notice.get('title');
-                  String content = notice.get('content');
-                  bool isChecked = notice.get('check');
-                  String date = notice.get('date');
+                    String title = notice.get('title');
+                    String content = notice.get('content');
+                    String date = notice.get('date');
+                    String uid = notice.get('uid');
 
-                  return NoticeBox(
-                    title: title,
-                    content: content,
-                    date: date,
-                    noticeService: noticeService,
-                    noticeId: notice.id,
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Divider();
-                },
-              );
+                    return NoticeBox(
+                      // 공지 글상자(제목+내용,체크 버튼과 삭제버튼)
+                      title: title,
+                      content: content,
+                      date: date,
+                      noticeService: noticeService,
+                      noticeId: notice.id,
+                      uid: uid,
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return Divider();
+                  },
+                );
+              }
             },
           ),
         );
@@ -86,6 +98,7 @@ class NoticeBox extends StatefulWidget {
     required this.date,
     required this.noticeService,
     required this.noticeId,
+    required this.uid,
   }) : super(key: key);
 
   final String title;
@@ -93,14 +106,34 @@ class NoticeBox extends StatefulWidget {
   final String date;
   final NoticeService noticeService;
   final String noticeId;
+  final String uid;
 
   @override
   State<NoticeBox> createState() => _NoticeBoxState();
 }
 
 class _NoticeBoxState extends State<NoticeBox> {
-  final noticeCollection = FirebaseFirestore.instance.collection('notice');
-  bool isChecked = false;
+  late SharedPreferences _prefs; // 게시글마다 체크 상태 저장
+  bool _isChecked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCheckedState();
+  }
+
+  Future<void> _loadCheckedState() async {
+    _prefs = await SharedPreferences.getInstance();
+    final isChecked = _prefs.getBool(widget.noticeId) ?? false;
+    setState(() {
+      _isChecked = isChecked;
+    });
+  }
+
+  void _updateCheckedState(bool isChecked) {
+    _prefs.setBool(widget.noticeId, isChecked);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -128,28 +161,30 @@ class _NoticeBoxState extends State<NoticeBox> {
 
           Row(
             children: [
-              /// 체크 표시
-              Consumer<NoticeService>(builder: (context, noticeService, _) {
-                return IconButton(
-                  onPressed: () {
-                    isChecked = !isChecked;
-                    noticeService.update(widget.noticeId, isChecked);
-                  },
-                  icon: Icon(
-                    CupertinoIcons.checkmark,
-                    color: isChecked ? Colors.blue : Colors.black,
-                  ),
-                );
-              }),
+              // 체크 표시
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    _isChecked = !_isChecked;
+                  });
+                  _updateCheckedState(_isChecked);
+                },
+                icon: Icon(
+                  CupertinoIcons.checkmark,
+                  color: _isChecked ? Colors.blue : Colors.black,
+                ),
+              ),
+
               Spacer(),
 
               /// 삭제 버튼
-              IconButton(
-                icon: Icon(CupertinoIcons.delete, color: Colors.black),
-                onPressed: () {
-                  deletePost(context, widget.noticeService, widget.noticeId);
-                },
-              ),
+              if (user.uid == widget.uid)
+                IconButton(
+                  icon: Icon(CupertinoIcons.delete, color: Colors.black),
+                  onPressed: () {
+                    deletePost(context, widget.noticeService, widget.noticeId);
+                  },
+                ),
             ],
           ),
         ],

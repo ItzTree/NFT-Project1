@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sscc_talk/data/color_palette.dart';
 import 'package:sscc_talk/services/notice_service.dart';
+import 'package:intl/intl.dart';
 
 import '../services/auth_service.dart';
 
@@ -99,6 +100,12 @@ class _WriteNoticePageState extends State<WriteNoticePage> {
                       height: 40,
                       child: ElevatedButton(
                         onPressed: () {
+                          // 현재 시간 (한국 기준)
+                          var localTime =
+                              DateTime.now().toUtc().add(Duration(hours: 9));
+                          var currentTime =
+                              DateFormat('yyyy/MM/dd HH:mm').format(localTime);
+
                           if (titleController.text.isNotEmpty &&
                               contentController.text.isNotEmpty) {
                             noticeService.create(
@@ -106,6 +113,7 @@ class _WriteNoticePageState extends State<WriteNoticePage> {
                               contentController.text,
                               isChecked,
                               user.uid,
+                              currentTime,
                             );
                             Navigator.of(context).pop();
                           }
