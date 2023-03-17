@@ -92,6 +92,12 @@ class AuthService extends ChangeNotifier {
     }
   }
 
+  /// 유저 이름 업데이트
+  Future<void> updateProfileName(String name) async {
+    final user = FirebaseAuth.instance.currentUser;
+    await user?.updateDisplayName(name);
+  }
+
   // 로그아웃
   void signOut() async {
     await FirebaseAuth.instance.signOut();

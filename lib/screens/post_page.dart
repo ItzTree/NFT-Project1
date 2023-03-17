@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sscc_talk/screens/notice_page.dart';
 
 import '../data/color_palette.dart';
+
+import '../screens/notice_page.dart';
 
 import '../services/auth_service.dart';
 import '../services/post_service.dart';
@@ -56,6 +57,7 @@ class PostPage extends StatelessWidget {
 
                   String title = post.get('title');
                   String content = post.get('content');
+
                   String date = post.get('date');
                   String uid = post.get('uid');
 

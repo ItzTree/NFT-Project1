@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:sscc_talk/data/color_palette.dart';
-import 'package:sscc_talk/services/post_service.dart';
 
+import '../data/color_palette.dart';
+import '../services/post_service.dart';
 import '../services/auth_service.dart';
 
 class WritePostPage extends StatefulWidget {

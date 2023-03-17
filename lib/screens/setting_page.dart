@@ -37,7 +37,7 @@ class SettingPage extends StatelessWidget {
               children: [
                 /// 닉네임 표시
                 Text(
-                  "${user?.email} 님", // $nickname 님
+                  "${user?.displayName} 님", // $nickname 님
                   style: TextStyle(
                     fontWeight: FontWeight.w900,
                     fontSize: 32,
