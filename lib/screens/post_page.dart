@@ -2,8 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/color_palette.dart';
+
+import '../screens/notice_page.dart';
 
 import '../services/auth_service.dart';
 import '../services/post_service.dart';
@@ -54,16 +57,18 @@ class PostPage extends StatelessWidget {
 
                   String title = post.get('title');
                   String content = post.get('content');
-                  bool isChecked = post.get('check');
+
                   String date = post.get('date');
+                  String uid = post.get('uid');
 
                   return PostBox(
-                    //공지 글상자(제목+내용,체크 버튼과 삭제버튼)
+                    //게시글 글상자(제목+내용,체크 버튼과 삭제버튼)
                     title: title,
                     content: content,
                     date: date,
                     postService: postService,
                     postId: post.id,
+                    uid: uid,
                   );
                 },
                 separatorBuilder: (context, index) {
@@ -86,6 +91,7 @@ class PostBox extends StatefulWidget {
     required this.date,
     required this.postService,
     required this.postId,
+    required this.uid,
   }) : super(key: key);
 
   final String title;
@@ -93,13 +99,33 @@ class PostBox extends StatefulWidget {
   final String date;
   final PostService postService;
   final String postId;
+  final String uid;
 
   @override
   State<PostBox> createState() => _PostBoxState();
 }
 
 class _PostBoxState extends State<PostBox> {
-  bool isChecked = false; // 필드: 체크표시
+  late SharedPreferences _prefs;
+  bool _isLiked = false; // 필드: 체크표시
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCheckedState();
+  }
+
+  Future<void> _loadCheckedState() async {
+    _prefs = await SharedPreferences.getInstance();
+    final isLiked = _prefs.getBool(widget.postId) ?? false;
+    setState(() {
+      _isLiked = isLiked;
+    });
+  }
+
+  void _updateLikedState(bool isLiked) {
+    _prefs.setBool(widget.postId, isLiked);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,23 +157,25 @@ class _PostBoxState extends State<PostBox> {
               IconButton(
                 icon: Icon(
                   CupertinoIcons.heart,
-                  color: isChecked ? Colors.pink : Colors.black,
+                  color: _isLiked ? Colors.pink : Colors.black,
                 ),
                 onPressed: () {
                   setState(() {
-                    isChecked = !isChecked;
+                    _isLiked = !_isLiked;
                   });
+                  _updateLikedState(_isLiked);
                 },
               ),
               Spacer(),
 
               /// 삭제 버튼
-              IconButton(
-                icon: Icon(CupertinoIcons.delete, color: Colors.black),
-                onPressed: () {
-                  deletePost(context, widget.postService, widget.postId);
-                },
-              ),
+              if (user.uid == widget.uid)
+                IconButton(
+                  icon: Icon(CupertinoIcons.delete, color: Colors.black),
+                  onPressed: () {
+                    deletePost(context, widget.postService, widget.postId);
+                  },
+                ),
             ],
           ),
         ],
