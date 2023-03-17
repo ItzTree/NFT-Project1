@@ -74,56 +74,38 @@ class _WritePostPageState extends State<WritePostPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 40),
 
-                /// 중요도 체크와 작성버튼
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    /// 중요 체크 버튼
-                    IconButton(
-                      icon: Icon(
-                        Icons.check,
-                        color: isChecked ? Colors.red : Colors.black,
-                      ),
+                /// 작성하기
+                Center(
+                  child: SizedBox(
+                    width: 200,
+                    height: 40,
+                    child: ElevatedButton(
                       onPressed: () {
-                        setState(() {
-                          isChecked = !isChecked;
-                        });
+                        if (titleController.text.isNotEmpty &&
+                            contentController.text.isNotEmpty) {
+                          postService.create(
+                            titleController.text,
+                            contentController.text,
+                            isChecked,
+                            user.uid,
+                          );
+                          Navigator.of(context).pop();
+                        }
                       },
-                    ),
-
-                    /// 작성하기
-                    SizedBox(
-                      width: 200,
-                      height: 40,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (titleController.text.isNotEmpty &&
-                              contentController.text.isNotEmpty) {
-                            postService.create(
-                              titleController.text,
-                              contentController.text,
-                              isChecked,
-                              user.uid,
-                            );
-                            Navigator.of(context).pop();
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: sscctalkPrimaryColor,
-                            elevation: 0),
-                        child: Text(
-                          "작성하기",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: sscctalkPrimaryColor, elevation: 0),
+                      child: Text(
+                        "작성하기",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),

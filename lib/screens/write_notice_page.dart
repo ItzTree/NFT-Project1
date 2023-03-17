@@ -44,7 +44,7 @@ class _WriteNoticePageState extends State<WriteNoticePage> {
                 /// 제목
                 SizedBox(
                   height: 65,
-                  width: 500,
+                  width: double.infinity,
                   child: TextField(
                     controller: titleController,
                     keyboardType: TextInputType.multiline,
@@ -52,16 +52,18 @@ class _WriteNoticePageState extends State<WriteNoticePage> {
                     obscureText: false,
                     maxLength: 30,
                     decoration: InputDecoration(
-                        hintText: "제목",
-                        counterText: '',
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black))),
+                      hintText: "제목",
+                      counterText: '',
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                    ),
                   ),
                 ),
 
                 /// 내용
                 SizedBox(
-                  width: 500,
+                  width: double.infinity,
                   child: TextField(
                     controller: contentController,
                     keyboardType: TextInputType.multiline,
@@ -75,7 +77,7 @@ class _WriteNoticePageState extends State<WriteNoticePage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 40),
 
                 /// 중요도 체크와 작성버튼
                 Row(
@@ -93,6 +95,8 @@ class _WriteNoticePageState extends State<WriteNoticePage> {
                         });
                       },
                     ),
+
+                    Spacer(),
 
                     /// 작성하기
                     SizedBox(
@@ -131,6 +135,9 @@ class _WriteNoticePageState extends State<WriteNoticePage> {
                         ),
                       ),
                     ),
+
+                    Spacer(),
+                    Spacer(),
                   ],
                 ),
               ],
