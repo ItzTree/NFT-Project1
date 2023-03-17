@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.read<AuthService>().currentUser();
+    user?.updateDisplayName("닉네임: NFT");
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

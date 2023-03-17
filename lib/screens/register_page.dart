@@ -77,6 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       cursorColor: Colors.black,
     );
+    String? nickname1 = nicknameRegisterTextField.toString();
 
     /// 회원가입 버튼
     var registerElevatedButton =
@@ -110,11 +111,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 ).showSnackBar(context);
               },
             );
+
+            authService.updateProfileName(nickname1);
           },
         ),
       );
     });
 
+    //화면 구성
     return Consumer<AuthService>(
       builder: (context, authService, child) {
         return Scaffold(
