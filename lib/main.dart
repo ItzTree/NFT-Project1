@@ -1,12 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sscc_talk/screens/main_body.dart';
 
 import 'services/auth_service.dart';
 import 'services/notice_service.dart';
 import 'services/post_service.dart';
 
+import 'screens/main_body.dart';
 import 'screens/login_page.dart';
 import 'screens/write_notice_page.dart';
 import 'screens/write_post_page.dart';
@@ -32,8 +32,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.read<AuthService>().currentUser();
-    user?.updateDisplayName("닉네임: NFT");
+    user?.updateDisplayName(user.displayName);
 
+    /// initialRoute
+    /// 로그인 정보가 없으면 로그인 화면을, 있으면 메인 화면을 표시한다.
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       scrollBehavior: NoGlowScrollBehavior(),

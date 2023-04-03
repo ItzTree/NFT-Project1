@@ -11,6 +11,7 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthService>(builder: (context, authService, child) {
       final user = authService.currentUser();
+
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -63,23 +64,23 @@ class SettingPage extends StatelessWidget {
                 ),
 
                 /// 내가 쓴 글
-                ListTile(
-                  onTap: () {},
-                  title: Text("내가쓴글"),
-                ),
+                // ListTile(
+                //   onTap: () {},
+                //   title: Text("내가쓴글"),
+                // ),
 
                 /// 정보 변경
-                ListTile(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ChangeInfoPage(),
-                      ),
-                    );
-                  },
-                  title: Text("정보변경"),
-                ),
+                // ListTile(
+                //   onTap: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => const ChangeInfoPage(),
+                //       ),
+                //     );
+                //   },
+                //   title: Text("정보변경"),
+                // ),
               ],
             ),
           ),

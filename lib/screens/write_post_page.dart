@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:sscc_talk/data/color_palette.dart';
-import 'package:sscc_talk/services/post_service.dart';
 
+import '../data/color_palette.dart';
+import '../services/post_service.dart';
 import '../services/auth_service.dart';
 
 class WritePostPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class WritePostPage extends StatefulWidget {
 }
 
 class _WritePostPageState extends State<WritePostPage> {
-  bool isChecked = false;
+  bool isLiked = false;
 
   var titleController = TextEditingController();
   var contentController = TextEditingController();
@@ -43,7 +44,7 @@ class _WritePostPageState extends State<WritePostPage> {
                 /// 제목
                 SizedBox(
                   height: 65,
-                  width: 500,
+                  width: double.infinity,
                   child: TextField(
                     controller: titleController,
                     keyboardType: TextInputType.multiline,
@@ -51,10 +52,12 @@ class _WritePostPageState extends State<WritePostPage> {
                     obscureText: false,
                     maxLength: 30,
                     decoration: InputDecoration(
-                        hintText: "제목",
-                        counterText: '',
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black))),
+                      hintText: "제목",
+                      counterText: '',
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                    ),
                   ),
                 ),
 
@@ -83,13 +86,20 @@ class _WritePostPageState extends State<WritePostPage> {
                     height: 40,
                     child: ElevatedButton(
                       onPressed: () {
+                        // 현재 시간 (한국 기준)
+                        var localTime =
+                            DateTime.now().toUtc().add(Duration(hours: 9));
+                        var currentTime =
+                            DateFormat('yyyy/MM/dd HH:mm').format(localTime);
+
                         if (titleController.text.isNotEmpty &&
                             contentController.text.isNotEmpty) {
                           postService.create(
                             titleController.text,
                             contentController.text,
-                            isChecked,
+                            isLiked,
                             user.uid,
+                            currentTime,
                           );
                           Navigator.of(context).pop();
                         }

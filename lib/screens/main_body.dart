@@ -4,7 +4,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import '../data/color_palette.dart';
 
 import 'post_page.dart';
-import 'home_page.dart';
+// import 'home_page.dart';
 import 'notice_page.dart';
 import 'setting_page.dart';
 
@@ -20,7 +20,7 @@ class _MainBodyState extends State<MainBody> {
 
   final List<Widget> _pageList = <Widget>[
     // 페이지 리스트
-    HomePage(),
+    // HomePage(),
     NoticePage(),
     PostPage(),
     SettingPage(),
@@ -43,25 +43,25 @@ class _MainBodyState extends State<MainBody> {
           gap: 8,
           iconSize: 28,
           tabs: [
+            // GButton(
+            //   icon: _selectedIndex == 0 ? Icons.home : Icons.home_outlined,
+            //   text: "메 인",
+            // ),
             GButton(
-              icon: _selectedIndex == 0 ? Icons.home : Icons.home_outlined,
-              text: "메 인",
-            ),
-            GButton(
-              icon: _selectedIndex == 1
+              icon: _selectedIndex == 0
                   ? Icons.campaign
                   : Icons.campaign_outlined,
               text: "공 지",
               iconSize: 32,
             ),
             GButton(
-              icon: _selectedIndex == 2
+              icon: _selectedIndex == 1
                   ? Icons.question_answer
                   : Icons.question_answer_outlined,
               text: "자 유",
             ),
             GButton(
-              icon: _selectedIndex == 3
+              icon: _selectedIndex == 2
                   ? Icons.settings
                   : Icons.settings_outlined,
               text: "설 정",

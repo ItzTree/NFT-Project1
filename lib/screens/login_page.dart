@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
             onPressed: () {
               // 로그인 버튼 누르면 메인 페이지로 이동
               authService.signIn(
-                //로그인 함수!!
+                // 로그인 함수
                 email: emailController.text,
                 password: passwordController.text,
                 onSuccess: () {
