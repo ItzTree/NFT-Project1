@@ -24,6 +24,7 @@ class NoticePage extends StatelessWidget {
       builder: (context, noticeService, child) {
         return Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: Text(
               "공 지 사 항",
               style:
