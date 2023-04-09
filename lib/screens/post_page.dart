@@ -23,6 +23,7 @@ class PostPage extends StatelessWidget {
       builder: (context, postService, child) {
         return Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: Text(
               "자 유 게 시 판",
               style:
