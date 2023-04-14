@@ -18,6 +18,7 @@ class AuthService extends ChangeNotifier {
   void signUp({
     required String email, // 이메일
     required String password, // 비밀번호
+    required String nickname, // 닉네임
     required Function() onSuccess, // 가입 성공시 호출되는 함수
     required Function(String err) onError, // 에러 발생시 호출되는 함수
   }) async {
@@ -32,10 +33,13 @@ class AuthService extends ChangeNotifier {
 
     // Firebase auth 회원 가입
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      await userCredential.user?.updateDisplayName(nickname);
 
       // 성공 함수 호출
       onSuccess();

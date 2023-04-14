@@ -37,8 +37,6 @@ class MyApp extends StatelessWidget {
     user?.updateDisplayName(nicknameMain);
 
     // user?.updateDisplayName("isaac Ha");;
-    print("main");
-    print(user?.displayName);
 
     /// initialRoute
     /// 로그인 정보가 없으면 로그인 화면을, 있으면 메인 화면을 표시한다.

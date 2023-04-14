@@ -77,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       cursorColor: Colors.black,
     );
-    String? nickname = nicknameRegisterTextField.toString();
+    // String? nickname = nicknameRegisterTextField.toString();
 
     /// 회원가입 버튼
     var registerElevatedButton =
@@ -97,10 +97,11 @@ class _RegisterPageState extends State<RegisterPage> {
               Text("회원가입", style: TextStyle(fontSize: 22, color: Colors.white)),
           onPressed: () {
             // authService.copynickname = nickname;
-            authService.changeCopyname(nickname);
+            // authService.changeCopyname(nickname);
             authService.signUp(
               email: emailRegisterController.text,
               password: passwordRegisterController.text,
+              nickname: nicknameRegisterController.text,
               onSuccess: () {
                 CustomSnackBar(
                   snackBarText: "회원가입 성공",

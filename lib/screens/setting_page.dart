@@ -71,8 +71,6 @@ class SettingPage extends StatelessWidget {
                     String? nicknameSetting =
                         context.read<AuthService>().copynickname;
                     user?.updateDisplayName(nicknameSetting);
-                    print("닉네임변경_환경설정");
-                    print(user?.displayName);
                   },
                   title: Text("닉네임 설정하기"),
                 ),
