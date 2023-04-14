@@ -63,6 +63,20 @@ class SettingPage extends StatelessWidget {
                   title: Text("회원탈퇴"),
                 ),
 
+                ListTile(
+                  onTap: () {
+                    dialogSetName(context);
+                    // user?.updateDisplayName(nickname);
+                    authService.changeCopyname("new nickname");
+                    String? nicknameSetting =
+                        context.read<AuthService>().copynickname;
+                    user?.updateDisplayName(nicknameSetting);
+                    print("닉네임변경_환경설정");
+                    print(user?.displayName);
+                  },
+                  title: Text("닉네임 설정하기"),
+                ),
+
                 /// 내가 쓴 글
                 // ListTile(
                 //   onTap: () {},
@@ -116,6 +130,76 @@ Future<dynamic> dialogWithdraw(BuildContext context) {
           },
           child: Text(
             '네',
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.red,
+            ),
+          ),
+        ),
+
+        /// 아니오
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+              Colors.white,
+            ),
+            elevation: MaterialStateProperty.all<double>(0),
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(
+            '아니오',
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Future<dynamic> dialogSetName(BuildContext context) {
+  var nicknameRegisterController = TextEditingController();
+  var nicknameRegisterTextField = TextField(
+    controller: nicknameRegisterController,
+    decoration: InputDecoration(
+      labelStyle: TextStyle(color: Colors.black),
+      contentPadding: EdgeInsets.symmetric(horizontal: 8),
+      focusedBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.black),
+      ),
+    ),
+    cursorColor: Colors.black,
+  );
+  String? nickname = nicknameRegisterTextField.toString();
+
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) => AlertDialog(
+      title: Text(
+        '닉네임을 입력하세요',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      content: nicknameRegisterTextField,
+      actions: [
+        /// 네
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+              Colors.white,
+            ),
+            elevation: MaterialStateProperty.all<double>(0),
+          ),
+          onPressed: () {
+            // do withdraw
+            // user?.updateDisplayName("isaac Ha");
+            Navigator.of(context).pop();
+          },
+          child: Text(
+            '변경',
             style: TextStyle(
               fontSize: 15,
               color: Colors.red,

@@ -10,6 +10,7 @@ import 'screens/main_body.dart';
 import 'screens/login_page.dart';
 import 'screens/write_notice_page.dart';
 import 'screens/write_post_page.dart';
+import 'screens/register_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // main 함수에서 async 사용하기 위해
@@ -32,7 +33,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.read<AuthService>().currentUser();
-    user?.updateDisplayName(user.displayName);
+    String? nicknameMain = context.read<AuthService>().copynickname;
+    user?.updateDisplayName(nicknameMain);
+
+    // user?.updateDisplayName("isaac Ha");;
+    print("main");
+    print(user?.displayName);
 
     /// initialRoute
     /// 로그인 정보가 없으면 로그인 화면을, 있으면 메인 화면을 표시한다.

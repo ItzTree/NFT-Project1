@@ -96,6 +96,8 @@ class _RegisterPageState extends State<RegisterPage> {
           child:
               Text("회원가입", style: TextStyle(fontSize: 22, color: Colors.white)),
           onPressed: () {
+            // authService.copynickname = nickname;
+            authService.changeCopyname(nickname);
             authService.signUp(
               email: emailRegisterController.text,
               password: passwordRegisterController.text,
@@ -103,7 +105,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 CustomSnackBar(
                   snackBarText: "회원가입 성공",
                 ).showSnackBar(context);
-                Navigator.of(context).pop();
               },
               onError: (err) {
                 CustomSnackBar(
@@ -112,7 +113,7 @@ class _RegisterPageState extends State<RegisterPage> {
               },
             );
 
-            authService.updateProfileName(nickname);
+            Navigator.of(context).pop();
           },
         ),
       );

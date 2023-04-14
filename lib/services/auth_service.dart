@@ -7,6 +7,13 @@ class AuthService extends ChangeNotifier {
     return FirebaseAuth.instance.currentUser;
   }
 
+  String? copynickname = "nicknameAutoo";
+
+  void changeCopyname(String? name) {
+    copynickname = name;
+    notifyListeners();
+  }
+
   // 회원가입
   void signUp({
     required String email, // 이메일
